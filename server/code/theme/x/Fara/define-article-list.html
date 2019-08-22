@@ -1,0 +1,103 @@
+{{define "Fara/article-list"}}
+{{if eq (len .Articles) 0}}
+{{.I18n.NoData}}
+{{end}}
+<div class="article__wrap">
+    {{range $index, $item := .Articles}}
+    <article class="article__item fn__flex">
+        <div class="article__meta article__meta--{{mod $index 4}}">
+            {{if gt $.UserCount 1}}
+            <div>
+                <a rel="nofollow"
+                   class="article__avatar"
+                   data-src="{{$item.Author.AvatarURLWithSize 116}}"
+                   href="{{$item.Author.URL}}">
+                </a>
+                <a href="{{$item.Author.URL}}">
+                    {{$item.Author.Name}}
+                </a>
+            </div>
+            {{end}}
+            <div>
+                {{$item.CreatedAt}}
+            </div>
+            <div>
+                <a href="{{$item.URL}}">
+                    {{$item.ViewCount}} {{$.I18n.View}}
+                </a>
+            </div>
+            {{if gt .CommentCount 0}}
+            <div>
+                <a href="{{$item.URL}}#pipeComments">
+                    {{$item.CommentCount}} {{$.I18n.Comment}}
+                </a>
+            </div>
+            {{end}}
+            {{if .Editable}}
+            <div>
+                <a href="{{$.Conf.Server}}/admin/articles/post?id={{$item.ID}}">
+                    {{$.I18n.Edit}}
+                </a>
+            </div>
+            {{end}}
+        </div>
+        <div class="fn__flex-1 article__main">
+            <h2 class="article__title">
+                {{if .Topped}}
+                <svg>
+                    <use xlink:href="#icon-perfect"></use>
+                </svg>
+                {{end}}
+                <a rel="bookmark" href="{{$item.URL}}">
+                    {{$item.Title}}
+                </a>
+            </h2>
+            {{if .Abstract}}
+            <section
+                    data-link="{{$item.URL}}"
+                    class="vditor-reset fn__flex-1"
+                    data-author="{{$item.Author.Name}}">
+                {{$item.Abstract}}
+            </section>
+            {{end}}
+            <div>
+                {{range .Tags}}
+                <a class="tag" rel="tag" href="{{.URL}}">{{.Title}}</a>
+                {{end}}
+            </div>
+        </div>
+    </article>
+    {{end}}
+</div>
+
+{{if gt (len $.Pagination.PageNums) 1}}
+<div class="ft__center">
+    <nav class="pagination">
+        {{if gt $.Pagination.PreviousPageNum 0}}
+        <a class="pagination__item"
+           href="?p={{$.Pagination.PreviousPageNum}}">
+            {{.I18n.PrePage}}
+        </a>
+        {{end}}
+        {{if gt $.Pagination.FirstPageNum 1}}
+        <a class="pagination__item" href="?p=1">1</a>{{if ne $.Pagination.FirstPageNum 2}}<span
+            class="pagination__item">...</span>{{end}}
+        {{end}}
+        {{range $.Pagination.PageNums}}
+        <a href="?p={{.}}"
+           class="pagination__item {{if eq . $.Pagination.CurrentPageNum}}pagination__item--active{{end}}">{{.}}</a>
+        {{end}}
+        {{if lt $.Pagination.LastPageNum $.Pagination.PageCount}}
+        {{if ne $.Pagination.LastPageNum (minus $.Pagination.PageCount 1)}}<span class="pagination__item">...</span>{{end}}
+        <a class="pagination__item" href="?p={{$.Pagination.PageCount}}">{{$.Pagination.PageCount}}</a>
+        {{end}}
+        {{if lt $.Pagination.CurrentPageNum $.Pagination.PageCount}}
+        <a class="pagination__item"
+           href="?p={{$.Pagination.NextPageNum}}">
+            {{.I18n.NextPage}}
+        </a>
+        {{end}}
+    </nav>
+</div>
+{{end}}
+{{end}}

@@ -1,0 +1,17 @@
+{
+  "code": 0,
+  "msg": "",
+  "data": {
+    "currentName": "Pipe",
+    "themes": [
+      {
+        "name": "Pipe",
+        "thumbnailURL": "https://img.hacpai.com/?theme=Finding"
+      },
+      {
+        "name": "abc",
+        "thumbnailURL": "https://img.hacpai.com/?theme=Finding"
+      }
+    ]
+  }
+}

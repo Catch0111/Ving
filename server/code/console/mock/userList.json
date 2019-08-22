@@ -1,0 +1,36 @@
+{
+  "code": 0,
+  "msg": "",
+  "data": {
+    "users": [
+      {
+        "id": 3,
+        "name": "Liyuan Li",
+        "nickname": "Vanessa11",
+        "role": 1,
+        "url": "https://hacpai.com/member/Vanessa",
+        "avatarURL": "https://static.hacpai.com/images/tags/b3log.png",
+        "articleCount": 20
+      },
+      {
+        "id": 3,
+        "name": "Liyuan Li2",
+        "nickname": "Vanessa",
+        "role": 4,
+        "url": "https://hacpai.com/member/Vanessa",
+        "avatarURL": "https://static.hacpai.com/images/tags/b3log.png",
+        "articleCount": 20
+      }
+    ],
+    "pagination": {
+      "currentPageNum": 16,
+      "pageSize": 15,
+      "pageCount": 100,
+      "windowSize": 20,
+      "recordCount": 1,
+      "pageNums": [
+        1
+      ]
+    }
+  }
+}

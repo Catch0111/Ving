@@ -1,0 +1,28 @@
+{{define "Medium/header"}}
+<header class="header">
+    <div class="wrapper fn__clear">
+        <a href="{{.BlogURL}}">
+            <img class="header__logo" data-src="{{.LogoURL}}">
+        </a>
+
+        <h1><a href="{{.BlogURL}}" class="header__title">{{.Setting.BasicBlogTitle}}</a></h1>
+
+        <div class="fn__right">
+            <a href="{{.BlogURL}}/search" aria-label="{{.I18n.Search}}"
+               class="pipe-tooltipped pipe-tooltipped--w header__icon">
+                <svg>
+                    <use xlink:href="#icon-search"></use>
+                </svg>
+            </a>
+            {{if eq .User.URole 0}}
+            <a href="{{.Conf.Server}}/start" class="header__a header__a--border">{{.I18n.StartToUse}}</a>
+            {{else}}
+            <a class="avatar pipe-tooltipped pipe-tooltipped--w header__icon"
+               aria-label="{{.I18n.Manage}}"
+               href="{{.Conf.Server}}/{{if ne .User.URole 4}}admin/{{end}}"
+               data-src="{{.User.AvatarURLWithSize 64}}"></a>
+            {{end}}
+        </div>
+    </div>
+</header>
+{{end}}

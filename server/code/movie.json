@@ -1,0 +1,14 @@
+{
+    "Server": "http://localhost:5678",
+    "Port": "5678",
+    "StaticServer": "",
+    "StaticResourceVersion": "1564895411214",
+    "RuntimeMode": "dev",
+    "LogLevel": "info",
+    "SessionSecret": "",
+    "SessionMaxAge": 86400,
+    "MongoConnect": "mongodb://root:123456@127.0.0.1:38128/admin",
+    "MongoDBName": "Movie",
+    "AxiosBaseURL": "/api",
+    "MockServer": "http://localhost:8888"
+}

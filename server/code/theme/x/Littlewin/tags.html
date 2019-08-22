@@ -1,0 +1,37 @@
+{{define "Littlewin/tags.html"}}
+<!DOCTYPE html>
+<html>
+<head>
+    {{template "head/head" .}}
+    {{template "head/3rdstatistic" .}}
+</head>
+<body>
+{{template "Littlewin/header" .}}
+<div class="fn__flex-1">
+    <div id="pjax" class="wrapper fn__flex">
+        {{if .pjax}}{{noescape "<!---- pjax {#pjax} start ---->"}}{{end}}
+        <div class="main">
+            <div class="module ft__center module--bottom module--space">
+                <h2 class="module__logo">{{.I18n.Tag}}</h2>
+                <span id="tagArticleCount">0</span> <span class="ft__fade ft__13">{{.I18n.Tags2}}</span>
+            </div>
+            <div class="module module__tags module--space fn__clear module--bottom" id="tags">
+                {{range .Tags}}
+                <a href="{{.URL}}" data-count="{{.ArticleCount}}" class="tag">{{.Title}} ({{.ArticleCount}})</a>
+                {{end}}
+            </div>
+        </div>
+        {{template "Littlewin/side" .}}
+        {{if .pjax}}{{noescape "<!---- pjax {#pjax} end ---->"}}{{end}}
+    </div>
+</div>
+{{template "Littlewin/footer" .}}
+{{if .pjax}}{{noescape "<!---- pjax {#pjax} start ---->"}}{{end}}
+<script>
+  increase({{len .Tags}}, 1000, 'tagArticleCount', 0)
+  addLevelToTag()
+</script>
+{{if .pjax}}{{noescape "<!---- pjax {#pjax} end ---->"}}{{end}}
+</body>
+</html>
+{{end}}

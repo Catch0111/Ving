@@ -1,0 +1,42 @@
+{{define "Koma/authors.html"}}
+<!DOCTYPE html>
+<html>
+<head>
+    {{template "head/head" .}}
+    {{template "head/3rdstatistic" .}}
+</head>
+<body>
+<div id="pjax">
+    {{if .pjax}}{{noescape "<!---- pjax {#pjax} start ---->"}}{{end}}
+{{template "Koma/side" .}}
+<div class="main">
+    <article class="article__item">
+        <header class="article__header">
+            <h2>
+                <span id="authorCount">0</span> <span class="ft__fade ft__13">{{.I18n.TeamMember2}}</span>
+            </h2>
+        </header>
+        <div class="author fn__clear">
+            {{range .Authors}}
+            <a class="author__item" href="{{.URL}}">
+                <div class="author__header">
+                    <div class="avatar" data-src="{{.AvatarURLWithSize 404}}"></div>
+                </div>
+                <h3 class="author__name">{{.Name}}</h3>
+                <span class="ft__12">{{.ArticleCount}} {{$.I18n.Article2}}</span>
+            </a>
+            {{end}}
+        </div>
+    </article>
+    {{template "Koma/footer" .}}
+</div>
+    {{if .pjax}}{{noescape "<!---- pjax {#pjax} end ---->"}}{{end}}
+</div>
+{{if .pjax}}{{noescape "<!---- pjax {#pjax} start ---->"}}{{end}}
+<script>
+  increase({{len .Authors}}, 1000, 'authorCount', 0)
+</script>
+{{if .pjax}}{{noescape "<!---- pjax {#pjax} end ---->"}}{{end}}
+</body>
+</html>
+{{end}}

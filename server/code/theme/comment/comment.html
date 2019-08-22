@@ -1,0 +1,51 @@
+{{define "comment/comment"}}
+<section class="pipe-comment__item" id="pipeComment{{.Item.ID}}">
+    <a rel="nofollow"
+       class="pipe-comment__avatar"
+       data-src="{{.Item.Author.AvatarURLWithSize 96}}"
+       href="{{.Item.Author.URL}}">
+    </a>
+    <div class="pipe-comment__body">
+        <div class="fn__clear">
+            <a href="{{.Item.Author.URL}}" class="ft__gray">{{.Item.Author.Name}}</a>
+            {{if .Item.Parent}}
+            <a class="ft__nowrap ft__12 ft__gray" href="{{.Item.Parent.URL}}">
+                <svg><use xlink:href="#icon-reply"></use></svg> {{.I18n.Reply}} {{.Item.Parent.Author.Name}}
+            </a>
+            {{end}}
+            <span class="ft__nowrap ft__12 ft__fade"> • {{.Item.CreatedAt}} </span>
+            <div class="fn__right">
+                <span class="pipe-comment__btn pipe-comment__btn--reply"
+                      data-title="{{.I18n.Reply}}{{.I18n.Colon}}{{.Item.Author.Name}}"
+                      data-id="{{.ArticleID}}"
+                      data-commentid="{{.Item.ID}}">
+                    <svg><use xlink:href="#icon-reply"></use></svg> {{.I18n.Reply}}
+                </span>
+
+                <span class="pipe-comment__btn pipe-comment__btn--danger
+                {{if .Item.Removable}}{{else}} pipe-comment__btn--none{{end}}"
+                      data-id="{{.Item.ID}}"
+                      data-label="{{.I18n.ConfirmDelete}}"
+                      data-label2="{{.I18n.StayStep}}">
+                    {{.I18n.Delete}}
+                </span>
+            </div>
+        </div>
+        <div class="vditor-reset"
+             data-author="{{.Item.Author.Name}}"
+             data-link="{{.Item.URL}}">
+            {{.Item.Content}}
+        </div>
+        {{if ne .Item.ReplyCount 0}}
+        <div>
+            <span class="ft__gray ft__12 fn__pointer pipe-comment__reply-icon" data-id="{{.Item.ID}}">
+                {{.Item.ReplyCount}} {{.I18n.Reply}}
+                <svg class="pipe-comment__chevron-down"><use xlink:href="#icon-chevron-up"></use></svg>
+            </span>
+            <div class="pipe-comment__reply fn__none">
+            </div>
+        </div>
+        {{end}}
+    </div>
+</section>
+{{end}}

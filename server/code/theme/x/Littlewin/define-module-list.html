@@ -1,0 +1,23 @@
+{{define "Littlewin/module-list"}}
+{{if ne (len .List) 0}}
+<div class="module module--bottom">
+    <div class="module__header fn__flex-center">
+        <svg><use xlink:href="#iconBar"></use></svg>
+        {{.Title}}
+    </div>
+    <ul class="module__list module--space">
+        {{range .List}}
+        <li class="fn__flex-center">
+            {{if gt $.UserCount 1}}
+            <a class="avatar pipe-tooltipped pipe-tooltipped--n"
+               href="{{.Author.URL}}"
+               aria-label="{{.Author.Name}}"
+               data-src="{{.Author.AvatarURLWithSize 74}}"></a>
+            {{end}}
+            <a href="{{.URL}}">{{.Title}}</a>
+        </li>
+        {{end}}
+    </ul>
+</div>
+{{end}}
+{{end}}

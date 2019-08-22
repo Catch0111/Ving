@@ -1,0 +1,30 @@
+{{define "Fara/tag-articles.html"}}
+<!DOCTYPE html>
+<html>
+<head>
+    {{template "head/head" .}}
+    {{template "head/3rdstatistic" .}}
+</head>
+<body>
+<div class="body__overlay"></div>
+<div class="body__content">
+    {{template "Fara/header" .}}
+    <div class="main" id="pjax">
+        {{if .pjax}}{{noescape "<!---- pjax {#pjax} start ---->"}}{{end}}
+        <div class="main__title">
+            {{.Tag.Title}}
+            <span id="tagArticlesCount" class="main__count">0</span> <span class="ft__13">{{.I18n.Article2}}</span>
+        </div>
+        {{template "Fara/article-list" .}}
+        {{if .pjax}}{{noescape "<!---- pjax {#pjax} end ---->"}}{{end}}
+    </div>
+    {{template "Fara/footer" .}}
+</div>
+{{if .pjax}}{{noescape "<!---- pjax {#pjax} start ---->"}}{{end}}
+<script>
+  increase({{.Tag.ArticleCount}}, 1000, 'tagArticlesCount', 0)
+</script>
+{{if .pjax}}{{noescape "<!---- pjax {#pjax} end ---->"}}{{end}}
+</body>
+</html>
+{{end}}

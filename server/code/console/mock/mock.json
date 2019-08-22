@@ -1,0 +1,341 @@
+{
+  "note": "This is a sample config file. You should change the mockDirectory to a more reasonable path.",
+  "mockDirectory": "./mock",
+  "allowedHeaders": [
+    "Content-Type",
+    "*"
+  ],
+  "allowedDomains": [
+    "localhost"
+  ],
+  "webServices": {
+    "status": {
+      "verbs": [
+        "get"
+      ],
+      "mockFile": "status.json"
+    },
+    "search": {
+      "verbs": [
+        "post"
+      ],
+      "mockFile": "searchList.json"
+    },
+    "init": {
+      "verbs": [
+        "post"
+      ],
+      "mockFile": "error.json"
+    },
+    "login": {
+      "verbs": [
+        "post"
+      ],
+      "mockFile": "responseLogin.json"
+    },
+    "logout": {
+      "verbs": [
+        "post"
+      ],
+      "mockFile": "success.json"
+    },
+    "console/thumbs": {
+      "verbs": [
+        "get"
+      ],
+      "mockFile": "thumbs.json"
+    },
+    "console/markdown": {
+      "verbs": [
+        "post"
+      ],
+      "mockFile": "markdown.json"
+    },
+    "console/tags": {
+      "verbs": [
+        "get"
+      ],
+      "mockFile": "tagList.json"
+    },
+    "console/blog/switch/:id": {
+      "verbs": [
+        "post"
+      ],
+      "mockFile": "responseSwitchBlog.json"
+    },
+    "console/themes": {
+      "verbs": [
+        "get"
+      ],
+      "mockFile": "themeList.json"
+    },
+    "console/themes/:id": {
+      "verbs": [
+        "put"
+      ],
+      "mockFile": "success.json"
+    },
+    "console/articles": {
+      "verbs": [
+        "get",
+        "post"
+      ],
+      "responses": {
+        "post": {
+          "mockFile": "success.json"
+        },
+        "get": {
+          "mockFile": "articleList.json"
+        }
+      }
+    },
+    "console/articles/:id": {
+      "verbs": [
+        "delete",
+        "put",
+        "get"
+      ],
+      "responses": {
+        "delete": {
+          "mockFile": "success.json"
+        },
+        "put": {
+          "mockFile": "error.json"
+        },
+        "get": {
+          "mockFile": "article.json"
+        }
+      }
+    },
+    "console/comments": {
+      "verbs": [
+        "get"
+      ],
+      "mockFile": "commentList.json"
+    },
+    "console/comments/:id": {
+      "verbs": [
+        "delete"
+      ],
+      "mockFile": "success.json"
+    },
+    "console/categories": {
+      "verbs": [
+        "get",
+        "post"
+      ],
+      "responses": {
+        "post": {
+          "mockFile": "success.json"
+        },
+        "get": {
+          "mockFile": "categoryList.json"
+        }
+      }
+    },
+    "console/categories/:id": {
+      "verbs": [
+        "delete",
+        "put",
+        "get"
+      ],
+      "responses": {
+        "delete": {
+          "mockFile": "success.json"
+        },
+        "put": {
+          "mockFile": "error.json"
+        },
+        "get": {
+          "mockFile": "category.json"
+        }
+      }
+    },
+    "console/navigations": {
+      "verbs": [
+        "get",
+        "post"
+      ],
+      "responses": {
+        "post": {
+          "mockFile": "success.json"
+        },
+        "get": {
+          "mockFile": "navigationList.json"
+        }
+      }
+    },
+    "console/navigations/:id": {
+      "verbs": [
+        "delete",
+        "put",
+        "get"
+      ],
+      "responses": {
+        "delete": {
+          "mockFile": "success.json"
+        },
+        "put": {
+          "mockFile": "error.json"
+        },
+        "get": {
+          "mockFile": "navigation.json"
+        }
+      }
+    },
+    "console/users": {
+      "verbs": [
+        "get",
+        "post"
+      ],
+      "responses": {
+        "post": {
+          "mockFile": "success.json"
+        },
+        "get": {
+          "mockFile": "userList.json"
+        }
+      }
+    },
+    "console/users/:id": {
+      "verbs": [
+        "delete",
+        "put",
+        "get"
+      ],
+      "responses": {
+        "delete": {
+          "mockFile": "success.json"
+        },
+        "put": {
+          "mockFile": "error.json"
+        },
+        "get": {
+          "mockFile": "user.json"
+        }
+      }
+    },
+    "console/blogs": {
+      "verbs": [
+        "get",
+        "post"
+      ],
+      "responses": {
+        "post": {
+          "mockFile": "success.json"
+        },
+        "get": {
+          "mockFile": "blogList.json"
+        }
+      }
+    },
+    "console/blogs/:id": {
+      "verbs": [
+        "delete",
+        "put",
+        "get"
+      ],
+      "responses": {
+        "delete": {
+          "mockFile": "success.json"
+        },
+        "put": {
+          "mockFile": "error.json"
+        },
+        "get": {
+          "mockFile": "blog.json"
+        }
+      }
+    },
+    "console/settings/preference": {
+      "verbs": [
+        "get", "put"
+      ],
+      "responses": {
+        "put": {
+          "mockFile": "success.json"
+        },
+        "get": {
+          "mockFile": "preference.json"
+        }
+      }
+    },
+    "console/settings/basic": {
+      "verbs": [
+        "get", "put"
+      ],
+      "responses": {
+        "put": {
+          "mockFile": "success.json"
+        },
+        "get": {
+          "mockFile": "basic.json"
+        }
+      }
+    },
+    "console/settings/sign": {
+      "verbs": [
+        "get", "put"
+      ],
+      "responses": {
+        "put": {
+          "mockFile": "success.json"
+        },
+        "get": {
+          "mockFile": "sign.json"
+        }
+      }
+    },
+    "console/settings/i18n": {
+      "verbs": [
+        "get", "put"
+      ],
+      "responses": {
+        "put": {
+          "mockFile": "success.json"
+        },
+        "get": {
+          "mockFile": "i18n.json"
+        }
+      }
+    },
+    "console/settings/feed": {
+      "verbs": [
+        "get", "put"
+      ],
+      "responses": {
+        "put": {
+          "mockFile": "success.json"
+        },
+        "get": {
+          "mockFile": "feed.json"
+        }
+      }
+    },
+    "console/settings/third-stat": {
+      "verbs": [
+        "get", "put"
+      ],
+      "responses": {
+        "put": {
+          "mockFile": "success.json"
+        },
+        "get": {
+          "mockFile": "third-stat.json"
+        }
+      }
+    },
+    "hp/apis/articles": {
+      "verbs": [
+        "get"
+      ],
+      "mockFile": "hacpaiArticleList.json"
+    },
+    "check-version": {
+      "verbs": [
+        "get"
+      ],
+      "mockFile": "latestVersion.json"
+    }
+  }
+}

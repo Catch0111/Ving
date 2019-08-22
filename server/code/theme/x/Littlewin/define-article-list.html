@@ -1,0 +1,111 @@
+{{define "Littlewin/article-list"}}
+{{if eq (len .Articles) 0}}
+{{.I18n.NoData}}
+{{end}}
+{{range .Articles}}
+<article class="article__item module module--bottom fn__flex">
+    <header>
+        <time class="article__time">
+            <div class="article__day">{{.CreatedAtDay}}</div>
+            {{.CreatedAtMonth}} {{$.I18n.Month}}
+            {{.CreatedAtYear}}
+        </time>
+    </header>
+    <section class="fn__flex-1">
+        <h2 class="fn__flex-center">
+            {{if .Topped}}
+            <div aria-label="{{$.I18n.Top}}" class="pipe-tooltipped pipe-tooltipped--n">
+                <svg>
+                    <use xlink:href="#iconTop"></use>
+                </svg>
+            </div>
+            &nbsp;
+            {{end}}
+            <a class="article__title" rel="bookmark" href="{{.URL}}">
+                {{.Title}}
+            </a>
+        </h2>
+        <div data-link="{{.URL}}"
+             data-author="{{.Author.Name}}"
+             class="vditor-reset article__abstract">
+            {{.Abstract}}
+        </div>
+        <footer class="article__footer fn__flex-center">
+            <div class="fn__flex-1 fn__flex-center">
+                <svg>
+                    <use xlink:href="#iconTag"></use>
+                </svg>
+                {{range .Tags}}
+                <a class="article__tag" rel="tag" href="{{.URL}}">{{.Title}}</a>
+                {{end}}
+
+                {{if gt $.UserCount 1}}
+                <div class="avatar" data-src="{{.Author.AvatarURLWithSize 116}}"></div>
+                <a rel="nofollow"
+                   href="{{.Author.URL}}">
+                    {{.Author.Name}}
+                </a>
+                {{end}}
+            </div>
+
+            {{if gt .ViewCount 0}}
+            <svg>
+                <use xlink:href="#iconView"></use>
+            </svg>
+            <a href="{{.URL}}#pipeComments">{{.ViewCount}}</a>
+            {{end}}
+
+            {{if gt .CommentCount 0}}
+            <span>&nbsp; &nbsp;</span>
+            <svg>
+                <use xlink:href="#iconComment"></use>
+            </svg>
+            <a href="{{.URL}}#pipeComments">{{.CommentCount}}</a>
+            {{end}}
+
+            {{if .Editable}}
+            <span>&nbsp; &nbsp;</span>
+            <svg>
+                <use xlink:href="#iconEdit"></use>
+            </svg>
+            <a href="{{$.Conf.Server}}/admin/articles/post?id={{.ID}}">
+                {{$.I18n.Edit}}
+            </a>
+            {{end}}
+        </footer>
+    </section>
+</article>
+{{end}}
+
+{{if gt (len $.Pagination.PageNums) 1}}
+<nav class="pagination fn__flex-center">
+    {{if gt $.Pagination.PreviousPageNum 0}}
+    <a class="pagination__omit pipe-tooltipped--w pipe-tooltipped"
+       aria-label="{{.I18n.PrePage}}" href="?p={{$.Pagination.PreviousPageNum}}">
+        <svg>
+            <use xlink:href="#icon-chevron-left"></use>
+        </svg>
+    </a>
+    {{end}}
+    {{if gt $.Pagination.FirstPageNum 1}}
+    <a class="pagination__item" href="?p=1">1</a>{{if ne $.Pagination.FirstPageNum 2}}<span
+        class="pagination__omit">...</span>{{end}}
+    {{end}}
+    {{range $.Pagination.PageNums}}
+    <a href="?p={{.}}" class="pagination__item {{if eq . $.Pagination.CurrentPageNum}}pagination__item--active{{end}}">{{.}}</a>
+    {{end}}
+    {{if lt $.Pagination.LastPageNum $.Pagination.PageCount}}
+    {{if ne $.Pagination.LastPageNum (minus $.Pagination.PageCount 1)}}<span class="pagination__omit">...</span>{{end}}
+    <a class="pagination__item" href="?p={{$.Pagination.PageCount}}">{{$.Pagination.PageCount}}</a>
+    {{end}}
+    {{if lt $.Pagination.CurrentPageNum $.Pagination.PageCount}}
+    <a class="pagination__omit pipe-tooltipped--e pipe-tooltipped"
+       aria-label="{{.I18n.NextPage}}" href="?p={{$.Pagination.NextPageNum}}">
+        <svg>
+            <use xlink:href="#icon-chevron-right"></use>
+        </svg>
+    </a>
+    {{end}}
+</nav>
+{{end}}
+{{end}}

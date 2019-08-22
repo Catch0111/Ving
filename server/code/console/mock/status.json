@@ -1,0 +1,27 @@
+{
+  "code": 0,
+  "msg": "",
+  "data": {
+    "version": "1.0.0",
+    "locale": "zh_CN",
+    "inited": true,
+    "name": "Liyuan Li",
+    "nickname": "Vanessa",
+    "avatarURL": "https://img.hacpai.com/avatar/1353745196544_1501644090048.png?imageView2/1/w/80/h/80/interlace/0/q/100",
+    "blogTitle": "Pipe",
+    "blogURL": "http://localhost:5897/blogs/pipe",
+    "role": 1,
+    "blogs": [
+      {
+        "title": "Wide",
+        "id": 2,
+        "url": "http://localhost:5897/blogs/Wide"
+      },
+      {
+        "title": "Sym",
+        "id": 3,
+        "url": "http://localhost:5897/blogs/Sym"
+      }
+    ]
+  }
+}

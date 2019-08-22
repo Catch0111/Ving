@@ -1,0 +1,107 @@
+/**
+ * function.
+ *
+ * @author <a href="http://vanessa.b3log.org">Liyuan Li</a>
+ * @version 0.4.0.0, Jul 17, 2019
+ */
+
+.fn {
+  &__flex {
+    display: flex;
+  }
+
+  &__flex-center {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  &__flex-shrink {
+    flex-shrink: 0;
+  }
+
+  &__flex-1 {
+    flex: 1;
+    min-width: 1px;
+  }
+
+  &__pointer {
+    cursor: pointer;
+  }
+
+  &__relative {
+    position: relative;
+  }
+
+  &__clear:before,
+  &__clear:after {
+    display: table;
+    content: "";
+  }
+
+  &__clear:after {
+    clear: both;
+  }
+
+  &__left {
+    float: left;
+  }
+
+  &__right {
+    float: right;
+  }
+
+  &__none {
+    display: none;
+  }
+
+  &__ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-wrap: normal;
+  }
+}
+
+// font
+.ft {
+  &__13 {
+    font-size: 13px;
+  }
+
+  &__12 {
+    font-size: 12px;
+
+    svg {
+      height: 10px;
+      width: 10px;
+    }
+  }
+
+  &__green {
+    color: #569e3d;
+  }
+
+  &__gray {
+    color: $gray;
+  }
+
+  &__fade {
+    color: $fade;
+  }
+
+  &__danger {
+    color: $red;
+  }
+
+  &__center {
+    text-align: center;
+  }
+
+  &__nowrap {
+    white-space: nowrap;
+  }
+
+  &-break {
+    word-break: break-all;
+  }
+}

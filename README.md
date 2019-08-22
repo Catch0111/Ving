@@ -1,0 +1,4 @@
+对于代码编写环境随意
+客户端 服务端都在vscode里编写
+运行环境 服务端在linux或macos环境运行，对windows环境支持的不好
+如果windows环境开发 可以用win10自带的子系统linux 在子系统编译在windows上编写

@@ -1,0 +1,17 @@
+{
+  "code": 0,
+  "msg": "",
+  "data": {
+    "basicBlogURL": "http://localhost:5897/blogs/pipe",
+    "basicFooter": "footer",
+    "basicHeader": "header",
+    "basicBlogTitle": "blogTitle",
+    "basicBlogSubtitle": "blogSubtitle",
+    "basicMetaKeywords": "metaKeywords",
+    "basicMetaDescription": "metaDescription",
+    "basicNoticeBoard": "noticeBoard",
+    "basicFaviconURL": "https://static.hacpai.com/images/favicon.png",
+    "basicLogoURL": "https://img.hacpai.com/solo-mid.png",
+    "basicCommentable": false
+  }
+}

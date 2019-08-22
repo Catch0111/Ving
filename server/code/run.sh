@@ -1,0 +1,1 @@
+go run main.go --show_cfg=true

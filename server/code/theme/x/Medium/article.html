@@ -1,0 +1,283 @@
+{{define "Medium/article.html"}}
+<!DOCTYPE html>
+<html>
+<head>
+    {{template "head/head" .}}
+    {{template "head/3rdstatistic" .}}
+    {{template "head/article" .}}
+</head>
+<body>
+<div id="pjax">
+    {{if .pjax}}{{noescape "<!---- pjax {#pjax} start ---->"}}{{end}}
+{{template "Medium/header" .}}
+<div class="main post__main">
+    {{if .Setting.BasicNoticeBoard}}
+    <div class="board">
+        {{.Setting.BasicNoticeBoard}}
+    </div>
+    {{end}}
+
+    <article class="post">
+        {{if gt $.UserCount 1}}
+        <div class="fn__flex post__user">
+            <a rel="nofollow"
+               class="avatar"
+               data-src="{{.Article.Author.AvatarURLWithSize 116}}"
+               href="{{.Article.Author.URL}}">
+            </a>
+            <div class="fn__flex-1 small">
+                <a href="{{.Article.Author.URL}}" class="name">{{.Article.Author.Name}}</a>
+                <div>
+                    <time>{{.Article.CreatedAt}}</time>
+                    •
+                    <a class="small" href="{{.URL}}#pipeComments">{{.Article.CommentCount}} {{$.I18n.Comment}}</a>
+                </div>
+            </div>
+        </div>
+        {{end}}
+        <h2 class="post__title">
+            {{if .Article.Topped}}
+            <svg>
+                <use xlink:href="#icon-perfect"></use>
+            </svg>
+            {{end}}
+            {{.Article.Title}}
+        </h2>
+        <section class="vditor-reset" id="articleContent" data-author="{{.Article.Author.Name}}">
+            {{.Article.Content}}
+        </section>
+        <div class="post__tags">
+            {{range .Article.Tags}}
+            <a class="tag" rel="tag" href="{{.URL}}">{{.Title}}</a>
+            {{end}}
+        </div>
+        <div class="post__share fn__clear{{if eq $.UserCount 1}} post__share--no{{end}}">
+            {{if eq $.UserCount 1}}
+            <time class="ft__gray">{{.Article.CreatedAt}} • </time>
+            {{end}}
+            <a href="{{.URL}}" class="post__view">{{.Article.ViewCount}} {{$.I18n.View}}</a>
+
+            <div class="fn__right">
+                <span id="articleCommentBtn"
+                      class="{{if gt .Article.CommentCount 0}}pipe-tooltipped pipe-tooltipped--n{{end}} article__edit ft-green"
+                      aria-label="{{$.I18n.Comment}}"
+                      data-title="{{$.I18n.Comment}}{{$.I18n.Colon}}{{.Article.Title}}"
+                      data-id="{{.Article.ID}}">
+                    <svg>
+                        <use xlink:href="#icon-comment"></use>
+                    </svg>
+                    {{if gt .Article.CommentCount 0}}{{.Article.CommentCount}}{{else}}{{$.I18n.Comment}}{{end}} &nbsp; &nbsp;
+                </span>
+
+                <span id="articleShare">
+                    <span class="article__edit" data-type="wechat">
+                        <svg><use xlink:href="#wechat"></use></svg>
+                    </span> &nbsp; &nbsp;
+                    <span class="article__edit" data-type="weibo">
+                        <svg><use xlink:href="#weibo"></use></svg>
+                    </span> &nbsp; &nbsp;
+                    <span class="article__edit" data-type="twitter">
+                        <svg><use xlink:href="#twitter"></use></svg>
+                    </span> &nbsp; &nbsp;
+                    <span class="article__edit" data-type="google">
+                        <svg><use xlink:href="#google"></use></svg>
+                    </span>
+                    <span class="article__code"
+                          data-title="{{.Article.Title}}"
+                          data-blogtitle="{{$.Setting.BasicBlogTitle}}"
+                          data-url="{{.Article.URL}}"
+                          data-avatar="{{.Article.Author.AvatarURLWithSize 128}}"></span>
+                </span>
+
+                {{if .Article.Editable}}
+                &nbsp; &nbsp;
+                <a href="{{$.Conf.Server}}/admin/articles/post?id={{.Article.ID}}"
+                   aria-label="{{$.I18n.Edit}}"
+                   class="pipe-tooltipped pipe-tooltipped--n article__edit">
+                    <svg>
+                        <use xlink:href="#icon-edit"></use>
+                    </svg>
+                </a>
+                {{end}}
+            </div>
+        </div>
+        {{if gt $.UserCount 1}}
+        <div class="fn__flex post__user">
+            <a rel="nofollow"
+               class="avatar"
+               data-src="{{.Article.Author.AvatarURLWithSize 116}}"
+               href="{{.Article.Author.URL}}">
+            </a>
+            <div class="fn__flex-1 small">
+                <a href="{{.Article.Author.URL}}" class="name">{{.Article.Author.Name}}</a>
+                <div>
+                    <time>{{.Article.CreatedAt}}</time>
+                    •
+                    <a class="small" href="{{.URL}}#pipeComments">{{.Article.CommentCount}} {{$.I18n.Comment}}</a>
+                </div>
+            </div>
+        </div>
+        {{end}}
+    </article>
+
+    <div class="article__toolbar">
+        <div class="wrapper fn__clear">
+            <a href="{{.URL}}" class="post__view">{{.Article.ViewCount}} {{$.I18n.View}}</a>
+            <div class="fn__right">
+                <span id="articleCommentBottomBtn" class="{{if gt .Article.CommentCount 0}}pipe-tooltipped pipe-tooltipped--n{{end}} article__edit ft-green"
+                      aria-label="{{$.I18n.Comment}}"
+                      data-title="{{$.I18n.Comment}}{{$.I18n.Colon}}{{.Article.Title}}"
+                      data-id="{{.Article.ID}}">
+                    <svg>
+                        <use xlink:href="#icon-comment"></use>
+                    </svg>
+                    {{if gt .Article.CommentCount 0}}{{.Article.CommentCount}}{{else}}{{$.I18n.Comment}}{{end}} &nbsp; &nbsp;
+                </span>
+
+                <span id="articleBottomShare">
+                    <span class="article__edit" data-type="wechat">
+                        <svg><use xlink:href="#wechat"></use></svg>
+                    </span> &nbsp; &nbsp;
+                    <span class="article__edit" data-type="weibo">
+                        <svg><use xlink:href="#weibo"></use></svg>
+                    </span> &nbsp; &nbsp;
+                    <span class="article__edit" data-type="twitter">
+                        <svg><use xlink:href="#twitter"></use></svg>
+                    </span> &nbsp; &nbsp;
+                    <span class="article__edit" data-type="google">
+                        <svg><use xlink:href="#google"></use></svg>
+                    </span>
+                    <span class="article__code"
+                          data-title="{{.Article.Title}}"
+                          data-blogtitle="{{$.Setting.BasicBlogTitle}}"
+                          data-url="{{.Article.URL}}"
+                          data-avatar="{{.Article.Author.AvatarURLWithSize 128}}"></span>
+                </span>
+
+                {{if .Article.Editable}}
+                &nbsp; &nbsp;
+                <a href="{{$.Conf.Server}}/admin/articles/post?id={{.Article.ID}}"
+                   aria-label="{{$.I18n.Edit}}"
+                   class="pipe-tooltipped pipe-tooltipped--n article__edit">
+                    <svg>
+                        <use xlink:href="#icon-edit"></use>
+                    </svg>
+                </a>
+                {{end}}
+
+                {{if .NextArticle}}
+                <a href="{{.NextArticle.URL}}" rel="next" class="article__next">
+                    <span class="ft__13 ft__gray">{{.I18n.NextArticle}}</span><br>
+                    <b>{{.NextArticle.Title}}</b>
+                </a>
+                {{end}}
+            </div>
+        </div>
+    </div>
+
+    <div class="article__bottom">
+        <div class="wrapper">
+            {{if le 1 (len .RecommendArticles)}}
+            <div class="fn__clear article__wrap">
+                {{range $index, $item := .RecommendArticles}}
+                {{if le $index 5}}
+                <div class="article__item--wrap">
+                <article class="article__item article__item--small">
+                    <a class="article__thumb"
+                       href="{{$item.URL}}"
+                       target="_blank"
+                       data-src="{{$item.ThumbnailURL}}"></a>
+
+                    <header class="article__panel">
+                        <div class="article__main article__main--user">
+                            <h2 class="article__title">
+                                <a rel="bookmark" href="{{$item.URL}}">
+                                    {{$item.Title}}
+                                </a>
+                            </h2>
+                        </div>
+
+                        <div class="article__meta ft__gray fn__flex">
+                            <a rel="nofollow"
+                               class="article__avatar"
+                               target="_blank"
+                               data-src="{{$item.Author.AvatarURL}}"
+                               href="{{$item.Author.URL}}">
+                            </a>
+
+                            <div class="fn__flex-1">
+                                <a href="{{$item.Author.URL}}" class="article__author">{{$item.Author.Name}}</a>
+                                <div class="fn__ellipsis">
+                                    <time>{{$item.CreatedAt}}</time>
+                                    •
+                                    <a href="{{$item.URL}}" class="ft__gray">{{$item.ViewCount}} {{$.I18n.View}}</a> •
+                                    <a href="{{$item.URL}}#comments" class="ft__gray">
+                                        {{if gt $item.CommentCount 0}}
+                                        {{$item.CommentCount}}
+                                        {{end}}
+                                        {{$.I18n.Comment}}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </header>
+                </article>
+                </div>
+                {{end}}
+                {{end}}
+            </div>
+            {{end}}
+        </div>
+
+        <div class="article__comment">
+            <div class="comment__title">{{.I18n.Comment}}</div>
+            {{template "comment/comments" .}}
+        </div>
+    </div>
+
+
+    {{template "comment/editor" .}}
+</div>
+
+<div class="post__side">
+    <span id="articleSideCommentBtn" class="pipe-tooltipped pipe-tooltipped--e article__edit ft-green"
+          aria-label="{{$.I18n.Comment}}"
+          data-title="{{$.I18n.Comment}}{{$.I18n.Colon}}{{.Article.Title}}"
+          data-id="{{.Article.ID}}">
+        {{if gt .Article.CommentCount 0}}{{.Article.CommentCount}}{{end}}
+        <svg>
+            <use xlink:href="#icon-comment"></use>
+        </svg>
+    </span>
+    <div id="articleSideShare">
+        <span class="article__edit" data-type="wechat">
+            <svg><use xlink:href="#wechat"></use></svg>
+        </span>
+            <span class="article__edit" data-type="weibo">
+            <svg><use xlink:href="#weibo"></use></svg>
+        </span>
+            <span class="article__edit" data-type="twitter">
+            <svg><use xlink:href="#twitter"></use></svg>
+        </span>
+            <span class="article__edit" data-type="google">
+            <svg><use xlink:href="#google"></use></svg>
+        </span>
+        <span class="article__code"
+              data-title="{{.Article.Title}}"
+              data-blogtitle="{{$.Setting.BasicBlogTitle}}"
+              data-url="{{.Article.URL}}"
+              data-avatar="{{.Article.Author.AvatarURLWithSize 128}}"></span>
+    </div>
+</div>
+
+<script type="text/javascript"
+        id="script"
+        data-blogurl="{{.BlogURL}}"
+        data-isLogin="{{if eq .User.URole 0}}false{{else}}true{{end}}"
+        src="{{.Conf.StaticServer}}/theme/x/{{.Setting.ThemeName}}/js/common.min.js?{{.Conf.StaticResourceVersion}}"
+></script>
+    {{if .pjax}}{{noescape "<!---- pjax {#pjax} end ---->"}}{{end}}
+</div>
+</body>
+</html>
+{{end}}

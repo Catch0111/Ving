@@ -1,0 +1,161 @@
+{{define "Fara/article.html"}}
+<!DOCTYPE html>
+<html>
+<head>
+    {{template "head/head" .}}
+    {{template "head/3rdstatistic" .}}
+    {{template "head/article" .}}
+</head>
+<div class="body__overlay"></div>
+<div class="body__content{{if .ToC}} body__content--toc{{end}}">
+    {{template "Fara/header" .}}
+    <div class="main" id="pjax">
+        {{if .pjax}}{{noescape "<!---- pjax {#pjax} start ---->"}}{{end}}
+        <article class="post__main">
+            <header>
+                <h1 class="article__title">
+                    {{if .Article.Topped}}
+                    <svg>
+                        <use xlink:href="#icon-perfect"></use>
+                    </svg>
+                    {{end}}
+                    {{.Article.Title}}
+                </h1>
+                <div class="post__meta">
+                    <time class="ft__nowrap">
+                        {{.Article.CreatedAt}}
+                    </time>
+                    {{if gt .UserCount 1}}
+                    by
+                    <a rel="nofollow"
+                       href="{{.Article.Author.URL}}">
+                        {{.Article.Author.Name}}
+                    </a>
+                    {{end}}
+                    ,  {{.Article.ViewCount}} {{$.I18n.View}}
+                    {{if gt .Article.CommentCount 0}}
+                    ,
+                    <a href="{{.Article.URL}}#pipeComments">
+                        {{.Article.CommentCount}} {{$.I18n.Comment}}
+                    </a>
+                    {{end}}
+                    {{if .Article.Editable}} ,
+                    <a href="{{$.Conf.Server}}/admin/articles/post?id={{.Article.ID}}">
+                        <svg>
+                            <use xlink:href="#icon-edit"></use>
+                        </svg>
+                        {{$.I18n.Edit}}
+                    </a>
+                    {{end}}
+                </div>
+            </header>
+            <section class="vditor-reset" id="articleContent"
+                     data-author="{{.Article.Author.Name}}">
+                {{.Article.Content}}
+            </section>
+            <div class="ft__center">
+                {{range .Article.Tags}}
+                <a class="tag" rel="tag" href="{{.URL}}">{{.Title}}</a>
+                {{end}}
+            </div>
+        </article>
+        <div class="post__nearby fn__clear">
+            {{if .PreviousArticle}}
+            <a href="{{.PreviousArticle.URL}}"
+               class="fn__flex-center"
+               rel="prev">
+                <svg class="near__icon">
+                    <use xlink:href="#icon-chevron-left"></use>
+                </svg>
+                <span>{{.PreviousArticle.Title}}</span>
+            </a>
+            {{end}}
+
+            {{if .NextArticle}}
+            <a href="{{.NextArticle.URL}}" rel="next"
+               class="fn__right fn__flex-center">
+                <span>{{.NextArticle.Title}}</span>
+                <svg class="near__icon-last">
+                    <use xlink:href="#icon-chevron-right"></use>
+                </svg>
+            </a>
+            {{end}}
+        </div>
+
+        {{if .ToC}}
+        <div class="toc">
+        {{.ToC}}
+        </div>
+        {{end}}
+
+        <div class="comment">
+            {{template "comment/comments" .}}
+        </div>
+
+        <div class="fn__flex post__about">
+            <div class="fn__flex-1 article__meta--1">
+                <div class="module__header">
+                    {{.I18n.RecommendArticle}}
+                </div>
+                <div class="article__meta article__meta--page">
+                    {{range .RecommendArticles}}
+                    <div class="fn__flex">
+                        <a class="article__avatar pipe-tooltipped pipe-tooltipped--n"
+                           href="{{.Author.URL}}"
+                           aria-label="{{.Author.Name}}"
+                           data-src='{{if eq "" .Author.AvatarURL}}{{.Author.AvatarURLWithSize 74}}{{else}}{{.Author.AvatarURL}}{{end}}'
+                        ></a>
+                        <div class="fn__flex-1">
+                            <a href="{{.URL}}" class="module__list-title">{{.Title}}</a>
+                            <br>
+                            <time class="ft__12">{{.CreatedAt}}</time>
+                        </div>
+                    </div>
+                    {{end}}
+                </div>
+            </div>
+            <div class="fn__flex-1 article__meta--3">
+                <div class="module__header">
+                    {{.I18n.MostViewArticle}}
+                </div>
+                <div class="article__meta article__meta--page">
+                    {{range $index, $item := .MostViewArticles}}
+                    {{if lt $index 7}}
+                    <div class="fn__flex">
+                        {{if gt $.UserCount 1}}
+                        <a class="article__avatar pipe-tooltipped pipe-tooltipped--n"
+                           href="{{$item.Author.URL}}"
+                           aria-label="{{$item.Author.Name}}"
+                           data-src='{{if eq "" $item.Author.AvatarURL}}{{$item.Author.AvatarURLWithSize 74}}{{else}}{{$item.Author.AvatarURL}}{{end}}'
+                        ></a>
+                        {{end}}
+                        <div class="fn__flex-1">
+                            <a href="{{$item.URL}}" class="module__list-title">{{$item.Title}}</a>
+                            <br>
+                            <time class="ft__12">{{$item.CreatedAt}}</time>
+                        </div>
+                    </div>
+                    {{end}}
+                    {{end}}
+                </div>
+            </div>
+            {{if eq .Setting.BasicNoticeBoard ""}}
+            {{else}}
+            <div class="fn__flex-1 article__meta--2">
+                <div class="module__header">
+                    {{.I18n.noticeBoard}}
+                </div>
+                <div class="article__meta article__meta--page">
+                    {{.Setting.BasicNoticeBoard}}
+                </div>
+            </div>
+            {{end}}
+        </div>
+
+        {{template "comment/editor" .}}
+        {{if .pjax}}{{noescape "<!---- pjax {#pjax} end ---->"}}{{end}}
+    </div>
+    {{template "Fara/footer" .}}
+</div>
+</html>
+{{end}}

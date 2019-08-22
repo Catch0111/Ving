@@ -1,0 +1,48 @@
+{
+  "name": "Pipe",
+  "version": "1.8.9",
+  "description": "Pipe theme",
+  "homepage": "https://github.com/b3log/pipe",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/b3log/pipe.git"
+  },
+  "bugs": {
+    "url": "https://github.com/b3log/pipe/issues"
+  },
+  "license": "GPLv3",
+  "private": true,
+  "author": "Vanessa <v@b3log.org> (http://vanessa.b3log.org)",
+  "maintainers": [
+    {
+      "name": "Vanessa",
+      "email": "v@b3log.org"
+    }
+  ],
+  "scripts": {
+    "dev": "gulp watch",
+    "build": "gulp"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "babelify": "^10.0.0",
+    "browserify": "^16.2.3",
+    "gulp": "^4.0.2",
+    "gulp-clean": "^0.4.0",
+    "gulp-clean-css": "^4.2.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-rename": "^1.4.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-uglify": "^3.0.2",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^2.0.0"
+  },
+  "dependencies": {
+    "aplayer": "^1.10.1",
+    "jquery": "^3.4.1",
+    "nprogress": "^0.2.0",
+    "qrious": "^4.0.2",
+    "turndown": "^5.0.3"
+  }
+}

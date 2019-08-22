@@ -1,0 +1,74 @@
+{{define "Littlewin/header"}}
+<header class="header">
+    <div class="wrapper">
+        <a href="{{.BlogURL}}"
+           class="header__logo">
+            <h1>{{.Setting.BasicBlogTitle}}</h1>
+            <img data-src="{{.LogoURL}}">
+        </a>
+        <div class="fn__none header__menu">
+            <svg><use xlink:href="#iconBar"></use></svg>
+        </div>
+        <div class="header__links fn__flex-center">
+            {{range .Navigations}}
+            <a href="{{.URL}}" target="{{.OpenMethod}}" class="fn__flex-center">
+                {{if ne "" .IconURL}}
+                <img data-src="{{.IconURL}}"/>
+                {{end}}
+                {{.Title}}
+            </a>
+            {{end}}
+            <a href="{{.BlogURL}}/search" class="fn__flex-center">
+                <svg>
+                    <use xlink:href="#search"></use>
+                </svg>
+                <span>{{.I18n.Search}}</span>
+            </a>
+            {{if eq .User.URole 0}}
+            <a href="{{.Conf.Server}}/start">{{.I18n.StartToUse}}</a>
+            {{else}}
+            <a href="{{.Conf.Server}}/{{if ne .User.URole 4}}admin/{{end}}">{{.I18n.Manage}}</a>
+            {{end}}
+        </div>
+    </div>
+</header>
+<div>
+    <div class="wrapper header__meta fn__flex">
+        <div class="main">
+            <div class="header__ad fn__flex-center module module--space">
+                <svg class="fn__flex-shrink"><use xlink:href="#iconAnnounce"></use></svg>
+                <div>&nbsp; &nbsp;</div>
+                <div class="fn__flex-1">
+                    {{if eq .Setting.BasicNoticeBoard ""}}
+                    {{.Setting.BasicBlogSubtitle}}
+                    {{else}}
+                    {{.Setting.BasicNoticeBoard}}
+                    {{end}}
+                </div>
+            </div>
+            <nav class="header__nav">
+                <a href="{{.BlogURL}}/categories">
+                    {{.I18n.Categories}}
+                </a>
+                <a href="{{.BlogURL}}/tags">
+                    {{.I18n.Tags}}
+                </a>
+                <a href="{{.BlogURL}}/archives">
+                    {{.I18n.Archives}}
+                </a>
+                {{if gt .UserCount 1}}
+                <a href="{{.BlogURL}}/authors">
+                    {{.I18n.Team}}
+                </a>
+                {{end}}
+                <a href="{{.BlogURL}}/atom" target="_blank">
+                    {{.I18n.Feed}}
+                </a>
+            </nav>
+        </div>
+        <aside class="side module--bottom">
+           <div id="player"></div>
+        </aside>
+    </div>
+</div>
+{{end}}
