@@ -1,6 +1,7 @@
 class Ids {
+  static const String titleRecommend = 'title_recommend';
   static const String titleHome = 'title_home';
-  static const String titleRepos = 'title_repos';
+  static const String titleCinema = 'title_cinema';
   static const String titleEvents = 'title_events';
   static const String titleSystem = 'title_system';
 
@@ -47,8 +48,9 @@ class Ids {
 
 Map<String, Map<String, String>> localizedSimpleValues = {
   'en': {
+    Ids.titleRecommend: 'Recommend',
     Ids.titleHome: 'Home',
-    Ids.titleRepos: 'Repos',
+    Ids.titleCinema: 'Cinema',
     Ids.titleEvents: 'Events',
     Ids.titleSystem: 'System',
     Ids.titleBookmarks: 'Bookmarks',
@@ -60,8 +62,9 @@ Map<String, Map<String, String>> localizedSimpleValues = {
     Ids.languageAuto: 'Auto',
   },
   'zh': {
+    Ids.titleRecommend: '推荐',
     Ids.titleHome: '主页',
-    Ids.titleRepos: '项目',
+    Ids.titleCinema: '放映厅',
     Ids.titleEvents: '动态',
     Ids.titleSystem: '体系',
     Ids.titleBookmarks: '书签',
@@ -77,8 +80,9 @@ Map<String, Map<String, String>> localizedSimpleValues = {
 Map<String, Map<String, Map<String, String>>> localizedValues = {
   'en': {
     'US': {
+      Ids.titleRecommend: 'Recommend',
       Ids.titleHome: 'Home',
-      Ids.titleRepos: 'Repos',
+      Ids.titleCinema: 'Cinema',
       Ids.titleEvents: 'Events',
       Ids.titleSystem: 'System',
       Ids.titleBookmarks: 'Bookmarks',
@@ -110,8 +114,9 @@ Map<String, Map<String, Map<String, String>>> localizedValues = {
   },
   'zh': {
     'CN': {
+      Ids.titleRecommend: '推荐',
       Ids.titleHome: '主页',
-      Ids.titleRepos: '项目',
+      Ids.titleCinema: '放映厅',
       Ids.titleEvents: '动态',
       Ids.titleSystem: '体系',
       Ids.titleBookmarks: '书签',
@@ -145,8 +150,9 @@ Map<String, Map<String, Map<String, String>>> localizedValues = {
       Ids.jump_count: '跳过 %\$0\$s',
     },
     'HK': {
+      Ids.titleRecommend: '推荐',
       Ids.titleHome: '主頁',
-      Ids.titleRepos: '項目',
+      Ids.titleCinema: '放映厅',
       Ids.titleEvents: '動態',
       Ids.titleSystem: '體系',
       Ids.titleBookmarks: '書簽',
@@ -176,8 +182,9 @@ Map<String, Map<String, Map<String, String>>> localizedValues = {
       Ids.jump_count: '跳过 %\$0\$s',
     },
     'TW': {
+      Ids.titleRecommend: '推荐',
       Ids.titleHome: '主頁',
-      Ids.titleRepos: '項目',
+      Ids.titleCinema: '放映厅',
       Ids.titleEvents: '動態',
       Ids.titleSystem: '體系',
       Ids.titleBookmarks: '書簽',

@@ -6,7 +6,7 @@ class HeaderItem extends StatelessWidget {
       {this.margin,
       this.titleColor,
       this.leftIcon,
-      this.titleId: Ids.titleRepos,
+      this.titleId: Ids.titleCinema,
       this.title,
       this.extraId: Ids.more,
       this.extra,

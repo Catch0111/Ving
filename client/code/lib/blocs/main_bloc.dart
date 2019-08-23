@@ -40,7 +40,7 @@ class MainBloc implements BlocBase {
   Stream<List<ReposModel>> get reposStream => _repos.stream;
 
   List<ReposModel> _reposList;
-  int _reposPage = 0;
+  int _cinemaPage = 0;
 
   ///****** ****** ****** Repos ****** ****** ****** /
 
@@ -131,7 +131,7 @@ class MainBloc implements BlocBase {
       case Ids.titleHome:
         return getHomeData(labelId);
         break;
-      case Ids.titleRepos:
+      case Ids.titleCinema:
         return getArticleListProject(labelId, page);
         break;
       case Ids.titleEvents:
@@ -152,8 +152,8 @@ class MainBloc implements BlocBase {
     switch (labelId) {
       case Ids.titleHome:
         break;
-      case Ids.titleRepos:
-        _page = ++_reposPage;
+      case Ids.titleCinema:
+        _page = ++_cinemaPage;
         break;
       case Ids.titleEvents:
         _page = ++_eventsPage;
@@ -165,7 +165,7 @@ class MainBloc implements BlocBase {
     }
     LogUtil.e("onLoadMore labelId: $labelId" +
         "   _page: $_page" +
-        "   _reposPage: $_reposPage");
+        "   _cinemaPage: $_cinemaPage");
     return getData(labelId: labelId, page: _page);
   }
 
@@ -175,8 +175,8 @@ class MainBloc implements BlocBase {
       case Ids.titleHome:
         getHotRecItem();
         break;
-      case Ids.titleRepos:
-        _reposPage = 0;
+      case Ids.titleCinema:
+        _cinemaPage = 0;
         break;
       case Ids.titleEvents:
         _eventsPage = 0;
@@ -186,7 +186,7 @@ class MainBloc implements BlocBase {
       default:
         break;
     }
-    LogUtil.e("onRefresh labelId: $labelId" + "   _reposPage: $_reposPage");
+    LogUtil.e("onRefresh labelId: $labelId" + "   _cinemaPage: $_cinemaPage");
     return getData(labelId: labelId, page: 0);
   }
 
@@ -241,7 +241,7 @@ class MainBloc implements BlocBase {
       if (ObjectUtil.isEmpty(_reposList)) {
         _repos.sink.addError("error");
       }
-      _reposPage--;
+      _cinemaPage--;
       homeEventSink.add(new StatusEvent(labelId, RefreshStatus.failed));
     });
   }

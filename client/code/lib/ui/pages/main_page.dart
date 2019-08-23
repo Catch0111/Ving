@@ -11,10 +11,9 @@ class _Page {
 
 final List<_Page> _allPages = <_Page>[
   new _Page(Ids.titleHome),
-  new _Page(Ids.titleRepos),
+  new _Page(Ids.titleRecommend),
+  new _Page(Ids.titleCinema),
   new _Page(Ids.titleEvents),
-  new _Page(Ids.titleSystem),
-  new _Page(Ids.titleSystem),
   new _Page(Ids.titleSystem),
 ];
 
@@ -24,19 +23,20 @@ class MainPage extends StatelessWidget {
     LogUtil.e("MainPagess build......");
     return new DefaultTabController(
         length: _allPages.length,
+        initialIndex: 1,
         child: new Scaffold(
           appBar: new MyAppBar(
-            leading: new Container(
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                  image: AssetImage(
-                    Utils.getImgPath('ali_connors'),
-                  ),
-                ),
-              ),
-            ),
-            centerTitle: true,
+            // leading: new Container(
+            //   decoration: BoxDecoration(
+            //     shape: BoxShape.circle,
+            //     image: DecorationImage(
+            //       image: AssetImage(
+            //         Utils.getImgPath('ali_connors'),
+            //       ),
+            //     ),
+            //   ),
+            // ),
+            // centerTitle: true,
             title: new TabLayout(),
             actions: <Widget>[
               new IconButton(
@@ -50,9 +50,9 @@ class MainPage extends StatelessWidget {
             ],
           ),
           body: new TabBarViewLayout(),
-          drawer: new Drawer(
-            child: new MainLeftPage(),
-          ),
+          // drawer: new Drawer(
+          //   child: new MainLeftPage(),
+          // ),
         ));
   }
 }
@@ -76,10 +76,13 @@ class TabBarViewLayout extends StatelessWidget {
   Widget buildTabView(BuildContext context, _Page page) {
     String labelId = page.labelId;
     switch (labelId) {
+      case Ids.titleRecommend:
+        return RecommendPage(labelId: labelId);
+        break;
       case Ids.titleHome:
         return HomePage(labelId: labelId);
         break;
-      case Ids.titleRepos:
+      case Ids.titleCinema:
         return ReposPage(labelId: labelId);
         break;
       case Ids.titleEvents:
