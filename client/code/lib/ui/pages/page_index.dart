@@ -2,7 +2,7 @@
 //export 'main_left_page.dart';
 export 'recommend_page.dart';
 export 'home_page.dart';
-export 'repos_page.dart';
+export 'cinema_page.dart';
 export 'events_page.dart';
 export 'system_page.dart';
 export 'setting_page.dart';

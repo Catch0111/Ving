@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:code/common/component_index.dart';
 
-bool isReposInit = true;
+bool isCinemaInit = true;
 
-class ReposPage extends StatelessWidget {
-  const ReposPage({Key key, this.labelId}) : super(key: key);
+class CinemaPage extends StatelessWidget {
+  const CinemaPage({Key key, this.labelId}) : super(key: key);
 
   final String labelId;
 
   @override
   Widget build(BuildContext context) {
-    LogUtil.e("ReposPage build......");
+    LogUtil.e("CinemaPage build......");
     RefreshController _controller = new RefreshController();
     final MainBloc bloc = BlocProvider.of<MainBloc>(context);
     bloc.homeEventStream.listen((event) {
@@ -19,8 +19,8 @@ class ReposPage extends StatelessWidget {
       }
     });
 
-    if (isReposInit) {
-      isReposInit = false;
+    if (isCinemaInit) {
+      isCinemaInit = false;
       Observable.just(1).delay(new Duration(milliseconds: 500)).listen((_) {
         bloc.onRefresh(labelId: labelId);
       });

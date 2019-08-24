@@ -83,7 +83,7 @@ class TabBarViewLayout extends StatelessWidget {
         return HomePage(labelId: labelId);
         break;
       case Ids.titleCinema:
-        return ReposPage(labelId: labelId);
+        return CinemaPage(labelId: labelId);
         break;
       case Ids.titleEvents:
         return EventsPage(labelId: labelId);
