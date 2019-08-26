@@ -44,6 +44,19 @@ class MainBloc implements BlocBase {
 
   ///****** ****** ****** Repos ****** ****** ****** /
 
+  ///****** ****** ****** Recommend ****** ****** ****** /
+  BehaviorSubject<List<VideoInfoModel>> _recommend =
+      BehaviorSubject<List<VideoInfoModel>>();
+
+  Sink<List<VideoInfoModel>> get _recommendSink => _recommend.sink;
+
+  Stream<List<VideoInfoModel>> get recommendStream => _recommend.stream;
+
+  List<VideoInfoModel> _recommendList;
+  int _recommendPage = 0;
+
+  ///****** ****** ****** Recommend ****** ****** ****** /
+  
   ///****** ****** ****** Events ****** ****** ****** /
 
   BehaviorSubject<List<ReposModel>> _events =
@@ -128,6 +141,9 @@ class MainBloc implements BlocBase {
   @override
   Future getData({String labelId, int page}) {
     switch (labelId) {
+      case Ids.titleRecommend:
+        return getRecommendList(labelId, page);
+        break;
       case Ids.titleHome:
         return getHomeData(labelId);
         break;
@@ -150,6 +166,9 @@ class MainBloc implements BlocBase {
   Future onLoadMore({String labelId}) {
     int _page = 0;
     switch (labelId) {
+      case Ids.titleRecommend:
+        _page = ++_recommendPage;
+        break;
       case Ids.titleHome:
         break;
       case Ids.titleCinema:
@@ -165,6 +184,7 @@ class MainBloc implements BlocBase {
     }
     LogUtil.e("onLoadMore labelId: $labelId" +
         "   _page: $_page" +
+        "   _recommendPage: $_recommendPage" +
         "   _cinemaPage: $_cinemaPage");
     return getData(labelId: labelId, page: _page);
   }
@@ -172,6 +192,9 @@ class MainBloc implements BlocBase {
   @override
   Future onRefresh({String labelId, bool isReload}) {
     switch (labelId) {
+      case Ids.titleRecommend:
+        _recommendPage = 0;
+        break;
       case Ids.titleHome:
         getHotRecItem();
         break;
@@ -186,7 +209,7 @@ class MainBloc implements BlocBase {
       default:
         break;
     }
-    LogUtil.e("onRefresh labelId: $labelId" + "   _cinemaPage: $_cinemaPage");
+    LogUtil.e("onRefresh labelId: $labelId" + "   _recommendPage: $_recommendPage" + "   _cinemaPage: $_cinemaPage");
     return getData(labelId: labelId, page: 0);
   }
 
@@ -242,6 +265,30 @@ class MainBloc implements BlocBase {
         _repos.sink.addError("error");
       }
       _cinemaPage--;
+      homeEventSink.add(new StatusEvent(labelId, RefreshStatus.failed));
+    });
+  }
+
+  Future getRecommendList(String labelId, int page) {
+    return wanRepository.getRecommendList(page).then((list) {
+      if (_recommendList == null) {
+        _recommendList = new List();
+      }
+      if (page == 0) {
+        _recommendList.clear();
+      }
+      _recommendList.addAll(list);
+      _recommendSink.add(UnmodifiableListView<VideoInfoModel>(_recommendList));
+      homeEventSink.add(new StatusEvent(
+          labelId,
+          ObjectUtil.isEmpty(list)
+              ? RefreshStatus.noMore
+              : RefreshStatus.idle));
+    }).catchError((_) {
+      if (ObjectUtil.isEmpty(_recommendList)) {
+        _recommend.sink.addError("error");
+      }
+      _recommendPage--;
       homeEventSink.add(new StatusEvent(labelId, RefreshStatus.failed));
     });
   }

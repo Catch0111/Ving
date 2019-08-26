@@ -38,6 +38,25 @@ class WanRepository {
     return list;
   }
 
+  Future<List<VideoInfoModel>> getRecommendList(int page) async {
+    BaseResp<Map<String, dynamic>> baseResp = await DioUtil()
+        .request<Map<String, dynamic>>(
+            Method.get,
+            WanAndroidApi.getPath(
+                path: WanAndroidApi.ARTICLE_LISTPROJECT, page: page));
+    List<VideoInfoModel> list;
+    if (baseResp.code != Constant.status_success) {
+      return new Future.error(baseResp.msg);
+    }
+    if (baseResp.data != null) {
+      ComData comData = ComData.fromJson(baseResp.data);
+      list = comData.datas.map((value) {
+        return VideoInfoModel.fromJson(value);
+      }).toList();
+    }
+    return list;
+  }
+
   Future<List<ReposModel>> getArticleList({int page, data}) async {
     BaseResp<Map<String, dynamic>> baseResp = await DioUtil()
         .request<Map<String, dynamic>>(Method.get,

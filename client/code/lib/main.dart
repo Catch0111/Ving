@@ -5,11 +5,21 @@ import 'package:code/common/component_index.dart';
 import 'package:code/ui/pages/main_page.dart';
 import 'package:code/ui/pages/page_index.dart';
 import 'package:auto_size/auto_size.dart';
+import 'package:flutter_ijkplayer.dart';
 
-void main() => runAutoSizeApp(BlocProvider<ApplicationBloc>(
+void main() async {
+  IjkConfig.isLog = true;
+//  IjkConfig.level = LogLevel.verbose;
+  await IjkManager.initIJKPlayer();
+  runAutoSizeApp(BlocProvider<ApplicationBloc>(
       bloc: ApplicationBloc(),
       child: BlocProvider(child: MyApp(), bloc: MainBloc()),
     ));
+}
+// void main() => runAutoSizeApp(BlocProvider<ApplicationBloc>(
+//       bloc: ApplicationBloc(),
+//       child: BlocProvider(child: MyApp(), bloc: MainBloc()),
+//     ));
 
 class MyApp extends StatefulWidget {
   @override

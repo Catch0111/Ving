@@ -1,3 +1,4 @@
+export 'recommend_item.dart';
 export 'article_item.dart';
 export 'com_list_page.dart';
 export 'com_list_view.dart';

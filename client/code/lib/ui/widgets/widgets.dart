@@ -20,6 +20,44 @@ class ProgressView extends StatelessWidget {
   }
 }
 
+class OptItem extends StatelessWidget {
+  const OptItem({
+    Key key,
+    this.labelId,
+    this.id,
+    this.isOpted,
+    this.curNum,
+    this.iconData,
+  }) : super(key: key);
+  final String labelId;
+  final int id;
+  final bool isOpted;
+  final int curNum;
+  final IconData iconData;
+
+  @override
+  Widget build(BuildContext context) {
+    return new Row(
+      children: <Widget>[
+        new SizedBox(
+          width: 24.0,
+          height: 24.0,
+          child: new Icon(
+            iconData,
+            color: (isOpted == true)
+            ? Colors.redAccent
+            : Colours.gray_99,
+          ),
+        ),
+        new Text(
+          curNum.toString(),
+          style: TextStyles.listTitle,
+        )
+      ],
+    );
+  }
+}
+
 class LikeBtn extends StatelessWidget {
   const LikeBtn({
     Key key,

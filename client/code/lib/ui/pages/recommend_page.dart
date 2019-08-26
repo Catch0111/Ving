@@ -27,9 +27,9 @@ class RecommendPage extends StatelessWidget {
     }
 
     return new StreamBuilder(
-        stream: bloc.reposStream,
+        stream: bloc.recommendStream,
         builder:
-            (BuildContext context, AsyncSnapshot<List<ReposModel>> snapshot) {
+            (BuildContext context, AsyncSnapshot<List<VideoInfoModel>> snapshot) {
           return new RefreshScaffold(
             labelId: labelId,
             loadStatus: Utils.getLoadStatus(snapshot.hasError, snapshot.data),
@@ -42,8 +42,8 @@ class RecommendPage extends StatelessWidget {
             },
             itemCount: snapshot.data == null ? 0 : snapshot.data.length,
             itemBuilder: (BuildContext context, int index) {
-              ReposModel model = snapshot.data[index];
-              return new ReposItem(model);
+              VideoInfoModel model = snapshot.data[index];
+              return new RecommendItem(model);
             },
           );
         });
