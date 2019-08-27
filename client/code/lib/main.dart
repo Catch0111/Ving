@@ -5,7 +5,7 @@ import 'package:code/common/component_index.dart';
 import 'package:code/ui/pages/main_page.dart';
 import 'package:code/ui/pages/page_index.dart';
 import 'package:auto_size/auto_size.dart';
-import 'package:flutter_ijkplayer.dart';
+import 'package:flutter_ijkplayer/flutter_ijkplayer.dart';
 
 void main() async {
   IjkConfig.isLog = true;

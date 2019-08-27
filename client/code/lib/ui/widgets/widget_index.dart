@@ -10,3 +10,5 @@ export 'web_scaffold.dart';
 export 'widgets.dart';
 export 'com_item.dart';
 export 'likebtn/like_button.dart';
+export 'video_item.dart';
+

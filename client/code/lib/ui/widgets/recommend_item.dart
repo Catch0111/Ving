@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:code/common/component_index.dart';
+import 'package:flutter_ijkplayer/flutter_ijkplayer.dart';
 
 class RecommendItem extends StatelessWidget {
   const RecommendItem(
@@ -7,11 +8,12 @@ class RecommendItem extends StatelessWidget {
     this.labelId,
     Key key,
     this.isHome,
+    this.controller,
   }) : super(key: key);
   final String labelId;
   final VideoInfoModel model;
   final bool isHome;
-
+  final IjkMediaController controller;
   @override
   Widget build(BuildContext context) {
     return new InkWell(
@@ -51,31 +53,50 @@ class RecommendItem extends StatelessWidget {
                       ],
                     ),
                     
-                    new InkWell(
-                      onTap: () {
-                        
-                      },
-                      child: new Icon(
-                        Icons.keyboard_arrow_down,
-                      ),
+                    new PopupMenuButton<String>(
+                      padding: EdgeInsets.zero,
+                      onSelected: (value) => NavigatorUtil.pushPage(context, VideoItem()),
+                      icon: Icon(Icons.keyboard_arrow_down),
+                      itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+                        const PopupMenuItem<String>(
+                          value: 'Preview',
+                          child: ListTile(
+                            leading: Icon(Icons.visibility),
+                            title: Text('Preview'),
+                          ),
+                        ),
+                        const PopupMenuItem<String>(
+                          value: 'Share',
+                          child: ListTile(
+                            leading: Icon(Icons.person_add),
+                            title: Text('Share'),
+                          ),
+                        ),
+                        const PopupMenuItem<String>(
+                          value: 'Get Link',
+                          child: ListTile(
+                            leading: Icon(Icons.link),
+                            title: Text('Get link'),
+                          ),
+                        ),
+                        const PopupMenuDivider(),
+                        const PopupMenuItem<String>(
+                          value: 'Remove',
+                          child: ListTile(
+                            leading: Icon(Icons.delete),
+                            title: Text('Remove'),
+                          ),
+                        ),
+                      ],
                     ),
                 ],),
               ),
               new Container(
                 alignment: Alignment.center,
                 margin: EdgeInsets.only(left: 10.0),
-                child: new CachedNetworkImage(
-                  height: 200,
-                  fit: BoxFit.fill,
-                  imageUrl: "https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/row_column.png",//model.envelopePic,
-                  placeholder: (BuildContext context, String url){
-                    return new ProgressView();
-                  },
-                  errorWidget: (BuildContext context, String url, Object error) {
-                    return new Icon(Icons.error);
-                  },
-                ),
+                child: VideoItem(videoUrl: "https://www.sample-videos.com/video123/mp4/360/big_buck_bunny_360p_30mb.mp4"),
               ),
+              // new VideoItem(),
               new Expanded(
                 flex: 1,
                 child: new Row(
@@ -119,5 +140,10 @@ class RecommendItem extends StatelessWidget {
                   bottom:
                       new BorderSide(width: 0.5, color: Colours.text_normal)))),
     );
+  }
+
+  void showMenuSelection(String value) {
+    LogUtil.e("showMenuSelection value -- " + value);
+    // NavigatorUtil.pushPage(context, RecHotPage(title: model.content),pageName: model.content);
   }
 }
