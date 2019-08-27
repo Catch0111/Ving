@@ -94,7 +94,7 @@ class RecommendItem extends StatelessWidget {
               new Container(
                 alignment: Alignment.center,
                 margin: EdgeInsets.only(left: 10.0),
-                child: VideoItem(videoUrl: "https://www.sample-videos.com/video123/mp4/360/big_buck_bunny_360p_30mb.mp4"),
+                child: VideoItem(videoUrl: 'http://1254070582.vod2.myqcloud.com/3fc671cbvodsh1254070582/2014/2016/07/04/a0f7fdb2be90e5bc-sd.mp4'),
               ),
               // new VideoItem(),
               new Expanded(
