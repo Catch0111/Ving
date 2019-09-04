@@ -1,113 +1,69 @@
-import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:code/common/component_index.dart';
-import 'package:code/ui/pages/main_page.dart';
-import 'package:code/ui/pages/page_index.dart';
-import 'package:auto_size/auto_size.dart';
-import 'package:flutter_ijkplayer/flutter_ijkplayer.dart';
+
+import 'package:oktoast/oktoast.dart';
+import 'package:provider/provider.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
+
+import 'package:ving/config/ui_adapter_config.dart';
+import 'package:ving/config/storage_manager.dart';
+import 'package:ving/ui/page/splash.dart';
+
+import 'config/provider_manager.dart';
+import 'config/router_config.dart';
+import 'generated/i18n.dart';
+import 'view_model/locale_model.dart';
+import 'view_model/theme_model.dart';
+
 
 void main() async {
-  IjkConfig.isLog = true;
-//  IjkConfig.level = LogLevel.verbose;
-  await IjkManager.initIJKPlayer();
-  runAutoSizeApp(BlocProvider<ApplicationBloc>(
-      bloc: ApplicationBloc(),
-      child: BlocProvider(child: MyApp(), bloc: MainBloc()),
-    ));
-}
-// void main() => runAutoSizeApp(BlocProvider<ApplicationBloc>(
-//       bloc: ApplicationBloc(),
-//       child: BlocProvider(child: MyApp(), bloc: MainBloc()),
-//     ));
+  Provider.debugCheckInvalidValueType = null;
 
-class MyApp extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return MyAppState();
-  }
+  /// 全局屏幕适配方案
+  InnerWidgetsFlutterBinding.ensureInitialized()
+    ..attachRootWidget(App(future: StorageManager.init()))
+    ..scheduleWarmUpFrame();
 }
 
-class MyAppState extends State<MyApp> {
-  Locale _locale;
-  Color _themeColor = Colours.app_main;
+class App extends StatelessWidget {
+  final Future future;
 
-  @override
-  void initState() {
-    super.initState();
-    setLocalizedValues(localizedValues);
-    _initAsync();
-    _initListener();
-  }
-
-  void _init() {
-    DioUtil.openDebug();
-    Options options = DioUtil.getDefOptions();
-    options.baseUrl = Constant.server_address;
-    String cookie = SpUtil.getString(BaseConstant.keyAppToken);
-    if (ObjectUtil.isNotEmpty(cookie)) {
-      Map<String, dynamic> _headers = new Map();
-      _headers["Cookie"] = cookie;
-      options.headers = _headers;
-    }
-    HttpConfig config = new HttpConfig(options: options);
-    DioUtil().setConfig(config);
-  }
-
-  void _initAsync() async {
-    await SpUtil.getInstance();
-    if (!mounted) return;
-    _init();
-    _loadLocale();
-  }
-
-  void _initListener() {
-    final ApplicationBloc bloc = BlocProvider.of<ApplicationBloc>(context);
-    bloc.appEventStream.listen((value) {
-      _loadLocale();
-    });
-  }
-
-  void _loadLocale() {
-    setState(() {
-      LanguageModel model =
-          SpHelper.getObject<LanguageModel>(Constant.keyLanguage);
-      if (model != null) {
-        _locale = new Locale(model.languageCode, model.countryCode);
-      } else {
-        _locale = null;
-      }
-
-      String _colorKey = SpHelper.getThemeColor();
-      if (themeColorMap[_colorKey] != null)
-        _themeColor = themeColorMap[_colorKey];
-    });
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
+  const App({this.future});
 
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
-      routes: {
-        BaseConstant.routeMain: (ctx) => MainPage(),
+    return FutureBuilder(
+      future: future,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState != ConnectionState.done) {
+          return SplashImage();
+        }
+        return OKToast(
+            child: MultiProvider(
+              providers: providers,
+              child: Consumer2<ThemeModel, LocaleModel>(
+                  builder: (context, themeModel, localeModel, child) {
+                return RefreshConfiguration(
+                  hideFooterWhenNotFull: true, //列表数据不满一页,不触发加载更多
+                  child: MaterialApp(
+                    debugShowCheckedModeBanner: false,
+                    theme: themeModel.themeData,
+                    darkTheme: themeModel.darkTheme,
+                    locale: localeModel.locale,
+                    localizationsDelegates: const [
+                      I18n.delegate,
+                      GlobalCupertinoLocalizations.delegate,
+                      GlobalMaterialLocalizations.delegate,
+                      GlobalWidgetsLocalizations.delegate
+                    ],
+                    supportedLocales: I18n.delegate.supportedLocales,
+                    onGenerateRoute: Router.generateRoute,
+                    initialRoute: RouteName.splash,
+                  ),
+                );
+              })));
       },
-      home: new SplashPage(),
-      theme: ThemeData.light().copyWith(
-        primaryColor: _themeColor,
-        accentColor: _themeColor,
-        indicatorColor: Colors.white,
-      ),
-      locale: _locale,
-      localizationsDelegates: [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        CustomLocalizations.delegate
-      ],
-      supportedLocales: CustomLocalizations.supportedLocales,
     );
   }
 }
