@@ -44,7 +44,7 @@ class _WebViewState extends State<ArticleDetailPluginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return null;
+    return new Container();
 //     return WebviewScaffold(
 //       url: widget.article.link,
 //       withJavascript: true,

@@ -152,7 +152,7 @@ class ArticleTitleWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return null;
+    return new Container();
     // return Html(
     //   padding: EdgeInsets.symmetric(vertical: 5),
     //   useRichText: false,
