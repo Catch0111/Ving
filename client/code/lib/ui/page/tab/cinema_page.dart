@@ -7,7 +7,7 @@ import 'package:ving/ui/helper/refresh_helper.dart';
 import 'package:ving/ui/widget/article_list_Item.dart';
 import 'package:ving/ui/widget/article_skeleton.dart';
 import 'package:ving/ui/widget/skeleton.dart';
-import 'package:ving/view_model/wechat_account_model.dart';
+import 'package:ving/view_model/cinema_model.dart';
 import 'package:provider/provider.dart';
 import 'package:ving/model/tree.dart';
 import 'package:ving/provider/provider_widget.dart';
@@ -39,8 +39,8 @@ class _CinemaPageState extends State<CinemaPage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return ProviderWidget<WechatAccountCategoryModel>(
-        model: WechatAccountCategoryModel(),
+    return ProviderWidget<CinameCategoryModel>(
+        model: CinameCategoryModel(),
         onModelReady: (model) {
           model.initData();
         },
@@ -72,7 +72,7 @@ class _CinemaPageState extends State<CinemaPage>
                       title: Stack(
                         children: [
                           CategoryDropdownWidget(
-                              Provider.of<WechatAccountCategoryModel>(context)),
+                              Provider.of<CinameCategoryModel>(context)),
                           Container(
                             margin: const EdgeInsets.only(right: 25),
                             color: primaryColor.withOpacity(1),
@@ -89,7 +89,7 @@ class _CinemaPageState extends State<CinemaPage>
                     ),
                     body: TabBarView(
                       children: List.generate(treeList.length,
-                          (index) => WechatArticleList(treeList[index].id)),
+                          (index) => CinameList(treeList[index].id)),
                     ),
                   );
                 },
@@ -101,16 +101,16 @@ class _CinemaPageState extends State<CinemaPage>
 }
 
 /// 微信公众号 文章列表
-class WechatArticleList extends StatefulWidget {
+class CinameList extends StatefulWidget {
   final int id;
 
-  WechatArticleList(this.id);
+  CinameList(this.id);
 
   @override
-  _WechatArticleListState createState() => _WechatArticleListState();
+  _CinameListState createState() => _CinameListState();
 }
 
-class _WechatArticleListState extends State<WechatArticleList>
+class _CinameListState extends State<CinameList>
     with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
@@ -119,8 +119,8 @@ class _WechatArticleListState extends State<WechatArticleList>
   Widget build(BuildContext context) {
     super.build(context);
 
-    return ProviderWidget<WechatArticleListModel>(
-      model: WechatArticleListModel(widget.id),
+    return ProviderWidget<CinameListModel>(
+      model: CinameListModel(widget.id),
       onModelReady: (model) => model.initData(),
       builder: (context, model, child) {
         if (model.busy) {

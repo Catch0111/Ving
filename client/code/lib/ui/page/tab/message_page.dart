@@ -9,7 +9,7 @@ import 'package:ving/model/tree.dart';
 import 'package:ving/provider/provider_widget.dart';
 
 import 'package:ving/provider/view_state_widget.dart';
-import 'package:ving/view_model/project_model.dart';
+import 'package:ving/view_model/message_model.dart';
 
 import '../article/article_list_page.dart';
 
@@ -35,8 +35,8 @@ class _MessagePageState extends State<MessagePage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return ProviderWidget<ProjectCategoryModel>(
-        model: ProjectCategoryModel(),
+    return ProviderWidget<MessageCategoryModel>(
+        model: MessageCategoryModel(),
         onModelReady: (model) {
           model.initData();
         },
@@ -71,7 +71,7 @@ class _MessagePageState extends State<MessagePage>
                       title: Stack(
                         children: [
                           CategoryDropdownWidget(
-                              Provider.of<ProjectCategoryModel>(context)),
+                              Provider.of<MessageCategoryModel>(context)),
                           Container(
                             margin: const EdgeInsets.only(right: 25),
                             color: primaryColor.withOpacity(1),

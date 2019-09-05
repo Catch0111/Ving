@@ -6,7 +6,7 @@ import 'package:ving/model/navigation_site.dart';
 import 'package:ving/model/tree.dart';
 import 'package:ving/provider/provider_widget.dart';
 import 'package:ving/provider/view_state_widget.dart';
-import 'package:ving/view_model/structure_model.dart';
+import 'package:ving/view_model/discover_model.dart';
 
 /// 体系
 class DiscoverPage extends StatefulWidget {
@@ -56,8 +56,8 @@ class _StructureCategoryListState extends State<StructureCategoryList>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return ProviderWidget<StructureCategoryModel>(
-        model: StructureCategoryModel(),
+    return ProviderWidget<DiscoverCategoryModel>(
+        model: DiscoverCategoryModel(),
         onModelReady: (model) {
           model.initData();
         },

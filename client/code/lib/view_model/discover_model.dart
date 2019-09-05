@@ -2,17 +2,17 @@ import 'package:ving/provider/view_state_refresh_list_model.dart';
 import 'package:ving/provider/view_state_list_model.dart';
 import 'package:ving/service/wan_android_repository.dart';
 
-class StructureCategoryModel extends ViewStateListModel {
+class DiscoverCategoryModel extends ViewStateListModel {
   @override
   Future<List> loadData() async {
     return await WanAndroidRepository.fetchTreeCategories();
   }
 }
 
-class StructureListModel extends ViewStateRefreshListModel {
+class DiscoverListModel extends ViewStateRefreshListModel {
   final int cid;
 
-  StructureListModel(this.cid);
+  DiscoverListModel(this.cid);
 
   @override
   Future<List> loadData({int pageNum}) async {

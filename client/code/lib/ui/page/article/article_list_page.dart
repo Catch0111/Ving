@@ -9,7 +9,7 @@ import 'package:ving/model/tree.dart';
 import 'package:ving/provider/provider_widget.dart';
 import 'package:ving/provider/view_state_widget.dart';
 import 'package:ving/ui/widget/article_list_Item.dart';
-import 'package:ving/view_model/structure_model.dart';
+import 'package:ving/view_model/discover_model.dart';
 
 /// 文章列表页面
 class ArticleListPage extends StatefulWidget {
@@ -30,8 +30,8 @@ class _ArticleListPageState extends State<ArticleListPage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return ProviderWidget<StructureListModel>(
-      model: StructureListModel(widget.cid),
+    return ProviderWidget<DiscoverListModel>(
+      model: DiscoverListModel(widget.cid),
       onModelReady: (model) => model.initData(),
       builder: (context, model, child) {
         if (model.busy) {
