@@ -69,10 +69,10 @@ class I18n implements WidgetsLocalizations {
   String get splashSkip => "Skip";
   /// "Home"
   String get tabHome => "Home";
-  /// "Project"
-  String get tabProject => "Project";
-  /// "Structure"
-  String get tabStructure => "Structure";
+  /// "Discover"
+  String get tabDiscover => "Discover";
+  /// "Message"
+  String get tabMsg => "Message";
   /// "Me"
   String get tabUser => "Me";
   /// "Setting"
@@ -145,8 +145,8 @@ class I18n implements WidgetsLocalizations {
   String get Like => "Like";
   /// "Share"
   String get share => "Share";
-  /// "Wechat"
-  String get wechatAccount => "Wechat";
+  /// "Cinema"
+  String get cinema => "Cinema";
   /// "Rate"
   String get rate => "Rate";
   /// "a Oh.."
@@ -229,12 +229,12 @@ class _I18n_zh_CN extends I18n {
   /// "首页"
   @override
   String get tabHome => "首页";
-  /// "项目"
+  /// "发现"
   @override
-  String get tabProject => "项目";
-  /// "体系"
+  String get tabDiscover => "发现";
+  /// "消息"
   @override
-  String get tabStructure => "体系";
+  String get tabMsg => "消息";
   /// "我的"
   @override
   String get tabUser => "我的";
@@ -343,9 +343,9 @@ class _I18n_zh_CN extends I18n {
   /// "分享"
   @override
   String get share => "分享";
-  /// "公众号"
+  /// "放映厅"
   @override
-  String get wechatAccount => "公众号";
+  String get cinema => "放映厅";
   /// "评分"
   @override
   String get rate => "评分";

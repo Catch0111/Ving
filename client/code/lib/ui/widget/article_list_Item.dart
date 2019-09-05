@@ -94,12 +94,12 @@ class ArticleItemWidget extends StatelessWidget {
                               SizedBox(
                                 height: 2,
                               ),
-                              Text(
-                                article.desc,
-                                style: Theme.of(context).textTheme.caption,
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 1,
-                              ),
+                              // Text(
+                              //   article.desc,
+                              //   style: Theme.of(context).textTheme.caption,
+                              //   overflow: TextOverflow.ellipsis,
+                              //   maxLines: 1,
+                              // ),
                             ],
                           ),
                         ),

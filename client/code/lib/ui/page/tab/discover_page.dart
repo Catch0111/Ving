@@ -9,12 +9,12 @@ import 'package:ving/provider/view_state_widget.dart';
 import 'package:ving/view_model/structure_model.dart';
 
 /// 体系
-class StructurePage extends StatefulWidget {
+class DiscoverPage extends StatefulWidget {
   @override
-  _StructurePageState createState() => _StructurePageState();
+  _DiscoverPageState createState() => _DiscoverPageState();
 }
 
-class _StructurePageState extends State<StructurePage>
+class _DiscoverPageState extends State<DiscoverPage>
     with AutomaticKeepAliveClientMixin {
   List<String> tabs = ['体系', '导航'];
 

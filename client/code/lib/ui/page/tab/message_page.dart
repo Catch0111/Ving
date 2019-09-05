@@ -13,12 +13,12 @@ import 'package:ving/view_model/project_model.dart';
 
 import '../article/article_list_page.dart';
 
-class ProjectPage extends StatefulWidget {
+class MessagePage extends StatefulWidget {
   @override
-  _ProjectPageState createState() => _ProjectPageState();
+  _MessagePageState createState() => _MessagePageState();
 }
 
-class _ProjectPageState extends State<ProjectPage>
+class _MessagePageState extends State<MessagePage>
     with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;

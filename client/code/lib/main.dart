@@ -33,6 +33,7 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final i18n = I18n.delegate;
     return FutureBuilder(
       future: future,
       builder: (context, snapshot) {
@@ -51,14 +52,15 @@ class App extends StatelessWidget {
                     theme: themeModel.themeData,
                     darkTheme: themeModel.darkTheme,
                     locale: localeModel.locale,
-                    localizationsDelegates: const [
-                      I18n.delegate,
+                    localizationsDelegates: [
+                      i18n,
                       GlobalCupertinoLocalizations.delegate,
                       GlobalMaterialLocalizations.delegate,
                       GlobalWidgetsLocalizations.delegate
                     ],
                     supportedLocales: I18n.delegate.supportedLocales,
                     onGenerateRoute: Router.generateRoute,
+                    localeResolutionCallback: i18n.resolution(fallback: new Locale("en", "US")),
                     initialRoute: RouteName.splash,
                   ),
                 );

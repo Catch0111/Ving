@@ -15,14 +15,14 @@ import 'package:ving/provider/provider_widget.dart';
 import 'package:ving/provider/view_state_widget.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-import 'project_page.dart';
+import 'message_page.dart';
 
-class WechatAccountPage extends StatefulWidget {
+class CinemaPage extends StatefulWidget {
   @override
-  _WechatAccountPageState createState() => _WechatAccountPageState();
+  _CinemaPageState createState() => _CinemaPageState();
 }
 
-class _WechatAccountPageState extends State<WechatAccountPage>
+class _CinemaPageState extends State<CinemaPage>
     with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;

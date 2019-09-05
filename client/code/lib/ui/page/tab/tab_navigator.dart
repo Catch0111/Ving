@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:ving/generated/i18n.dart';
 
 import 'home_page.dart';
-import 'project_page.dart';
-import 'structure_page.dart';
+import 'message_page.dart';
+import 'discover_page.dart';
 import 'user_page.dart';
-import 'wechat_account_page.dart';
+import 'cinema_page.dart';
 
 class TabNavigator extends StatefulWidget {
   TabNavigator({Key key}) : super(key: key);
@@ -53,19 +53,19 @@ class _TabNavigatorState extends State<TabNavigator> {
             title: Text(I18n.of(context).tabHome),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.format_list_bulleted),
-            title: Text(I18n.of(context).tabProject),
+            icon: Icon(Icons.explore),
+            title: Text(I18n.of(context).tabDiscover),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.group_work),
-            title: Text(I18n.of(context).wechatAccount),
+            title: Text(I18n.of(context).cinema),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.call_split),
-            title: Text(I18n.of(context).tabStructure),
+            icon: Icon(Icons.message),
+            title: Text(I18n.of(context).tabMsg),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.insert_emoticon),
+            icon: Icon(Icons.person),
             title: Text(I18n.of(context).tabUser),
           ),
         ],
@@ -80,8 +80,8 @@ class _TabNavigatorState extends State<TabNavigator> {
 
 List<Widget> pages = <Widget>[
   HomePage(),
-  ProjectPage(),
-  WechatAccountPage(),
-  StructurePage(),
+  DiscoverPage(),
+  CinemaPage(),
+  MessagePage(),
   UserPage()
 ];
