@@ -25,7 +25,7 @@ class ApiInterceptor extends InterceptorsWrapper {
     if (statusCode != 200) {
       /// 非200会在http的onError()中
     } else {
-//      debugPrint('---api-response--->resp----->${response.data}');
+     debugPrint('---api-response--->resp----->${response.data}');
       if (response.data is Map) {
         RespData respData = RespData.fromJson(response.data);
         if (respData.success) {

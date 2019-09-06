@@ -2,26 +2,26 @@ import 'dart:io';
 
 import 'package:flutter/material.dart' hide Banner, showSearch;
 import 'package:flutter/cupertino.dart';
-
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:ving/generated/i18n.dart';
+
+import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:provider/provider.dart';
+
 import 'package:ving/ui/helper/refresh_helper.dart';
 import 'package:ving/ui/widget/skeleton.dart';
-import 'package:provider/provider.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:ving/config/router_config.dart';
-import 'package:ving/flutter/search.dart';
-import 'package:ving/model/article.dart';
-import 'package:ving/provider/provider_widget.dart';
-import 'package:ving/view_model/scroll_controller_model.dart';
 import 'package:ving/ui/widget/animated_provider.dart';
 import 'package:ving/ui/widget/banner_image.dart';
 import 'package:ving/provider/view_state_widget.dart';
 import 'package:ving/ui/widget/article_list_Item.dart';
 import 'package:ving/ui/widget/article_skeleton.dart';
 import 'package:ving/view_model/home_model.dart';
-
 import 'package:ving/ui/page/search/search_delegate.dart';
+import 'package:ving/config/router_config.dart';
+import 'package:ving/flutter/search.dart';
+import 'package:ving/model/article.dart';
+import 'package:ving/provider/provider_widget.dart';
+import 'package:ving/view_model/scroll_controller_model.dart';
+import 'package:ving/generated/i18n.dart';
 
 const double kHomeRefreshHeight = 180.0;
 
@@ -70,17 +70,8 @@ class _HomePageState extends State<HomePage>
                   maxOverScrollExtent: kHomeRefreshHeight,
 
                   child: SmartRefresher(
-                      enableTwoLevel: true,
                       controller: homeModel.refreshController,
                       header: HomeRefreshHeader(),
-                      onTwoLevel: () async {
-                        await Navigator.of(context)
-                            .pushNamed(RouteName.homeSecondFloor);
-                        await Future.delayed(Duration(milliseconds: 300));
-                        Provider.of<HomeModel>(context)
-                            .refreshController
-                            .twoLevelComplete();
-                      },
                       footer: RefresherFooter(),
                       onRefresh: homeModel.refresh,
                       onLoading: homeModel.loadMore,
@@ -111,7 +102,7 @@ class _HomePageState extends State<HomePage>
                                 child: EmptyAnimatedSwitcher(
                                   display: tapToTopModel.showTopBtn,
                                   child: Text(Platform.isIOS
-                                      ? 'FunFlutter'
+                                      ? 'Ving'
                                       : I18n.of(context).appName),
                                 ),
                               ),
@@ -119,12 +110,7 @@ class _HomePageState extends State<HomePage>
                             expandedHeight: bannerHeight,
                             pinned: true,
                           ),
-//                          SliverPadding(
-//                            padding: EdgeInsets.only(top: 5),
-//                          ),
-                          if (homeModel.idle)
-                            HomeTopArticleList(),
-                          HomeArticleList(),
+                          HomeVideoList(),
                         ],
                       )),
                 );
@@ -201,28 +187,7 @@ class BannerWidget extends StatelessWidget {
   }
 }
 
-class HomeTopArticleList extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    HomeModel homeModel = Provider.of(context);
-    return SliverList(
-      delegate: SliverChildBuilderDelegate(
-        (context, index) {
-          Article item = homeModel.topArticles[index];
-          return ArticleItemWidget(
-            item,
-            index: index,
-            top: true,
-          );
-        },
-        childCount: homeModel.topArticles?.length ?? 0,
-      ),
-    );
-    ;
-  }
-}
-
-class HomeArticleList extends StatelessWidget {
+class HomeVideoList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     HomeModel homeModel = Provider.of(context);
