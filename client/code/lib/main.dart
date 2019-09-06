@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-
+import 'package:flutter_ijkplayer/flutter_ijkplayer.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -18,12 +18,15 @@ import 'view_model/theme_model.dart';
 
 
 void main() async {
+  IjkConfig.isLog = true;
   Provider.debugCheckInvalidValueType = null;
 
   /// 全局屏幕适配方案
   InnerWidgetsFlutterBinding.ensureInitialized()
     ..attachRootWidget(App(future: StorageManager.init()))
     ..scheduleWarmUpFrame();
+
+  await IjkManager.initIJKPlayer();
 }
 
 class App extends StatelessWidget {

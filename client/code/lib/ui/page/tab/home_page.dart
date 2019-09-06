@@ -14,11 +14,12 @@ import 'package:ving/ui/widget/banner_image.dart';
 import 'package:ving/provider/view_state_widget.dart';
 import 'package:ving/ui/widget/article_list_Item.dart';
 import 'package:ving/ui/widget/article_skeleton.dart';
+import 'package:ving/ui/widget/video_item.dart';
 import 'package:ving/view_model/home_model.dart';
 import 'package:ving/ui/page/search/search_delegate.dart';
 import 'package:ving/config/router_config.dart';
 import 'package:ving/flutter/search.dart';
-import 'package:ving/model/article.dart';
+import 'package:ving/model/video.dart';
 import 'package:ving/provider/provider_widget.dart';
 import 'package:ving/view_model/scroll_controller_model.dart';
 import 'package:ving/generated/i18n.dart';
@@ -172,7 +173,7 @@ class BannerWidget extends StatelessWidget {
                       onTap: () {
                         var banner = banners[index];
                         Navigator.of(context).pushNamed(RouteName.articleDetail,
-                            arguments: Article()
+                            arguments: Video()
                               ..id = banner.id
                               ..title = banner.title
                               ..link = banner.url
@@ -201,10 +202,10 @@ class HomeVideoList extends StatelessWidget {
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         (context, index) {
-          Article item = homeModel.list[index];
-          return ArticleItemWidget(
-            item,
+          Video item = homeModel.list[index];
+          return VideoItem(
             index: index,
+            videoInfo: item,
           );
         },
         childCount: homeModel.list?.length ?? 0,

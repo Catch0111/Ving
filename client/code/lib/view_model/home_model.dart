@@ -1,15 +1,15 @@
-import 'package:ving/model/article.dart';
+import 'package:ving/model/video.dart';
 import 'package:ving/model/banner.dart';
 import 'package:ving/provider/view_state_refresh_list_model.dart';
 import 'package:ving/service/wan_android_repository.dart';
 
 class HomeModel extends ViewStateRefreshListModel {
   List<Banner> _banners;
-  List<Article> _topArticles;
+  List<Video> _topArticles;
 
   List<Banner> get banners => _banners;
 
-  List<Article> get topArticles => _topArticles;
+  List<Video> get topArticles => _topArticles;
 
   @override
   Future<List> loadData({int pageNum}) async {

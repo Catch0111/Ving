@@ -40,6 +40,7 @@ dependencies:
   shimmer: ^1.0.0
   cached_network_image: ^1.1.1
   flare_flutter: 1.5.5
+  flutter_ijkplayer: ^0.3.3
 
   # third_app
   share: 0.6.2+1 #分享

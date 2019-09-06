@@ -6,6 +6,7 @@ import 'package:ving/model/search.dart';
 import 'package:ving/model/navigation_site.dart';
 import 'package:ving/model/tree.dart';
 import 'package:ving/model/user.dart';
+import 'package:ving/model/video.dart';
 
 class WanAndroidRepository {
   // 轮播
@@ -19,7 +20,7 @@ class WanAndroidRepository {
   // 置顶文章
   static Future fetchTopArticles() async {
     var response = await http.get('article/top/json');
-    return response.data.map<Article>((item) => Article.fromMap(item)).toList();
+    return response.data.map<Video>((item) => Video.fromMap(item)).toList();
   }
 
   // 文章
@@ -28,7 +29,7 @@ class WanAndroidRepository {
     var response = await http.get('article/list/$pageNum/json',
         queryParameters: (cid != null ? {'cid': cid} : null));
     return response.data['datas']
-        .map<Article>((item) => Article.fromMap(item))
+        .map<Video>((item) => Video.fromMap(item))
         .toList();
   }
 
