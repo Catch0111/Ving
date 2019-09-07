@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ijkplayer/flutter_ijkplayer.dart';
 import 'package:ving/model/video.dart';
 import 'package:ving/ui/widget/widgets.dart';
+import 'package:ving/utils/log_util.dart';
 
 class VideoItem extends StatefulWidget {
 
@@ -35,9 +36,19 @@ class _VideoItemState extends State<VideoItem> {
     controller?.dispose();
     super.dispose();
   }
+  
+  Widget _buildControllerWidget(IjkMediaController controller) {
+    return DefaultIJKControllerWidget(
+      controller: controller,
+      verticalGesture: false,
+      playWillPauseOther: true,
+      horizontalGesture: false,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
+    LogUtil.e("build ------------------------ ");
     return new InkWell(
       onTap: () {
       },
@@ -58,8 +69,8 @@ class _VideoItemState extends State<VideoItem> {
                         ClipOval(
                           child: Image.network(
                             'https://pic2.zhimg.com/v2-639b49f2f6578eabddc458b84eb3c6a1.jpg',
-                            width: 30,
-                            height: 30,
+                            width: 60,
+                            height: 60,
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -118,6 +129,7 @@ class _VideoItemState extends State<VideoItem> {
                     aspectRatio: 1280 / 720,
                     child: IjkPlayer(
                       mediaController: controller,
+                      controllerWidgetBuilder: _buildControllerWidget,
                     ),
                   ),
               ),
