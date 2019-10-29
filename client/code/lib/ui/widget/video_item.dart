@@ -4,6 +4,8 @@ import 'package:ving/model/video.dart';
 import 'package:ving/ui/widget/widgets.dart';
 import 'package:ving/utils/log_util.dart';
 
+import 'image.dart';
+
 class VideoItem extends StatefulWidget {
 
   const VideoItem(
@@ -49,6 +51,7 @@ class _VideoItemState extends State<VideoItem> {
   @override
   Widget build(BuildContext context) {
     LogUtil.e("build ------------------------ ");
+    LogUtil.e(widget.videoInfo.desc);
     return new InkWell(
       onTap: () {
       },
@@ -67,11 +70,11 @@ class _VideoItemState extends State<VideoItem> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
                         ClipOval(
-                          child: Image.network(
-                            'https://pic2.zhimg.com/v2-639b49f2f6578eabddc458b84eb3c6a1.jpg',
-                            width: 60,
-                            height: 60,
-                            fit: BoxFit.cover,
+                          child: WrapperImage(
+                            imageType: ImageType.random,
+                            url: 'https://pic2.zhimg.com/v2-639b49f2f6578eabddc458b84eb3c6a1.jpg',
+                            height: 30,
+                            width: 30,
                           ),
                         ),
                         new Text(
@@ -79,7 +82,7 @@ class _VideoItemState extends State<VideoItem> {
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           // style: TextStyles.listTitle,
-                          style: new TextStyle(fontSize: 12.0, color: Colors.grey[700]),
+                          style: new TextStyle(fontSize: 15.0, color: Colors.grey[700]),
                         ),
                       ],
                     ),

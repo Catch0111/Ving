@@ -14,6 +14,6 @@ class MessageCategoryModel extends ViewStateListModel<Tree> {
 class MessageListModel extends ViewStateRefreshListModel<Article> {
   @override
   Future<List<Article>> loadData({int pageNum}) async {
-    return await WanAndroidRepository.fetchArticles(pageNum, cid: 294);
+    return await WanAndroidRepository.fetchVideos(pageNum, cid: 294);
   }
 }

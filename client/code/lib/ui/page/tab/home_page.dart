@@ -202,7 +202,7 @@ class HomeVideoList extends StatelessWidget {
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         (context, index) {
-          Video item = homeModel.list[index];
+          Video item = homeModel.videos[index];
           return VideoItem(
             index: index,
             videoInfo: item,

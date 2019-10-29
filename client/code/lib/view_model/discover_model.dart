@@ -16,7 +16,7 @@ class DiscoverListModel extends ViewStateRefreshListModel {
 
   @override
   Future<List> loadData({int pageNum}) async {
-    return await WanAndroidRepository.fetchArticles(pageNum, cid: cid);
+    return await WanAndroidRepository.fetchVideos(pageNum, cid: cid);
   }
 }
 

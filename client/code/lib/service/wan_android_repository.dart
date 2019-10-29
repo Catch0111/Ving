@@ -18,13 +18,13 @@ class WanAndroidRepository {
   }
 
   // 置顶文章
-  static Future fetchTopArticles() async {
+  static Future fetchTopVideos() async {
     var response = await http.get('article/top/json');
     return response.data.map<Video>((item) => Video.fromMap(item)).toList();
   }
 
   // 文章
-  static Future fetchArticles(int pageNum, {int cid}) async {
+  static Future fetchVideos(int pageNum, {int cid}) async {
     await Future.delayed(Duration(seconds: 1));
     var response = await http.get('article/list/$pageNum/json',
         queryParameters: (cid != null ? {'cid': cid} : null));
