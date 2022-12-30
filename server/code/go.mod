@@ -6,7 +6,7 @@ require (
 	github.com/b3log/gulu v0.0.0-20190911144311-55d63ebf1b4a
 	github.com/bluele/gcache v0.0.0-20190518031135-bc40bd653833
 	github.com/gin-contrib/sessions v0.0.1
-	github.com/gin-gonic/gin v1.4.0
+	github.com/gin-gonic/gin v1.7.0
 	github.com/go-stack/stack v1.8.0 // indirect
 	github.com/golang/snappy v0.0.1 // indirect
 	github.com/google/go-cmp v0.3.1 // indirect
